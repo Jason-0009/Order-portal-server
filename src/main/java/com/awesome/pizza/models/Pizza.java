@@ -12,7 +12,8 @@ import lombok.Data;
 public class Pizza {
     @Id
     private String id;
+    private String imageUrl;
     private String name;
     private List<String> ingredients;
-    private int price;
+    private float price;
 }
