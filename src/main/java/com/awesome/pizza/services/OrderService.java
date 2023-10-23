@@ -17,4 +17,8 @@ public class OrderService {
     public Page<Order> findAll(Pageable pageable) {
         return orderRepository.findAll(pageable);
     }
+
+    public void placeOrder(Order order) {
+        orderRepository.save(order);
+    }
 }

@@ -23,4 +23,15 @@ public class OrderController {
 
         return new ResponseEntity<>(orders, HttpStatus.OK);
     }
+
+    @PostMapping("/orders")
+    public ResponseEntity<Void> placeOrder(@RequestBody Order order) {
+        try {
+            orderService.placeOrder(order);
+
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().build();
+        }
+    }
 }
