@@ -12,7 +12,7 @@ import com.awesome.pizza.services.OrderService;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/order")
+@RequestMapping("/orders")
 @RequiredArgsConstructor
 public class OrderController {
     private final OrderService orderService;
@@ -24,7 +24,7 @@ public class OrderController {
         return new ResponseEntity<>(orders, HttpStatus.OK);
     }
 
-    @PostMapping("/orders")
+    @PostMapping
     public ResponseEntity<Void> placeOrder(@RequestBody Order order) {
         try {
             orderService.placeOrder(order);

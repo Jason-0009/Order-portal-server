@@ -14,7 +14,7 @@ public class Order {
     @Id
     private String id;
     private Date date;
-    private Double total;
+    private Double totalPrice;
     private OrderState state;
     private List<OrderItem> items;
 }
