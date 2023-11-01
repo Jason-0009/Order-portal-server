@@ -18,6 +18,10 @@ public class OrderService {
         return orderRepository.findAll(pageable);
     }
 
+    public Page<Order> findByCustomerId(String customerId, Pageable pageable) {
+        return orderRepository.findByCustomerId(customerId, pageable);
+    }
+
     public void placeOrder(Order order) {
         orderRepository.save(order);
     }

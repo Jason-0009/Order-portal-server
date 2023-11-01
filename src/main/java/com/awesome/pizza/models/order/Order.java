@@ -17,4 +17,5 @@ public class Order {
     private Double totalPrice;
     private OrderState state;
     private List<OrderItem> items;
+    private String customerId;
 }
