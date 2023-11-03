@@ -31,12 +31,8 @@ public class OrderController {
 
     @PostMapping
     public ResponseEntity<Void> placeOrder(@RequestBody Order order) {
-        try {
-            orderService.placeOrder(order);
+        orderService.placeOrder(order);
 
-            return ResponseEntity.ok().build();
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().build();
-        }
+        return ResponseEntity.ok().build();
     }
 }
