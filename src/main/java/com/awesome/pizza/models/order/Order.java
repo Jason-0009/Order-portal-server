@@ -13,7 +13,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Order {
     @Id
     private String id;
-    private String customerId;
     private Date date;
     private Double totalPrice;
     private OrderState state;

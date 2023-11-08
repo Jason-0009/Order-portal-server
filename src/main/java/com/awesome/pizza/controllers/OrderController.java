@@ -24,11 +24,6 @@ public class OrderController {
         return new ResponseEntity<>(orders, HttpStatus.OK);
     }
 
-    @GetMapping("/customer/{customerId}")
-    public Page<Order> getOrderPageByCustomerId(@PathVariable String customerId, Pageable pageable) {
-        return orderService.findByCustomerId(customerId, pageable);
-    }
-
     @PostMapping
     public ResponseEntity<Void> placeOrder(@RequestBody Order order) {
         orderService.placeOrder(order);
