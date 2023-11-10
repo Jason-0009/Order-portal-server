@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class AuthenticationController {
-    @GetMapping("/auth-status")
+    @GetMapping("/is-authenticated")
     public boolean isAuthenticated() {
-        OidcUser principal = (OidcUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-        return principal != null;
+        return principal instanceof OidcUser;
     }
 }
