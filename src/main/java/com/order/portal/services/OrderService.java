@@ -1,11 +1,11 @@
-package com.awesome.pizza.services;
+package com.order.portal.services;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import com.awesome.pizza.models.order.Order;
-import com.awesome.pizza.repositories.OrderRepository;
+import com.order.portal.models.order.Order;
+import com.order.portal.repositories.OrderRepository;
 
 import lombok.RequiredArgsConstructor;
 

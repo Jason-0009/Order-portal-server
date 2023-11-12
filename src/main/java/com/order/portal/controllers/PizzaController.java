@@ -1,4 +1,4 @@
-package com.awesome.pizza.controllers;
+package com.order.portal.controllers;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -8,13 +8,13 @@ import org.springframework.http.ResponseEntity;
 
 import org.springframework.web.bind.annotation.*;
 
+import com.order.portal.services.PizzaService;
+import com.order.portal.models.Pizza;
+
 import lombok.RequiredArgsConstructor;
 
-import com.awesome.pizza.models.Pizza;
-import com.awesome.pizza.services.PizzaService;
-
 @RestController
-@RequestMapping("/pizzas")
+@RequestMapping("/api/pizzas")
 @RequiredArgsConstructor
 public class PizzaController {
     private final PizzaService pizzaService;

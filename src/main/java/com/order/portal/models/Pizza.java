@@ -1,4 +1,4 @@
-package com.awesome.pizza.models;
+package com.order.portal.models;
 
 import java.util.List;
 

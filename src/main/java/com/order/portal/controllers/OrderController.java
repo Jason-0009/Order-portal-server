@@ -1,4 +1,4 @@
-package com.awesome.pizza.controllers;
+package com.order.portal.controllers;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -6,13 +6,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.awesome.pizza.models.order.Order;
-import com.awesome.pizza.services.OrderService;
+import com.order.portal.services.OrderService;
+import com.order.portal.models.order.Order;
 
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/orders")
+@RequestMapping("/api/orders")
 @RequiredArgsConstructor
 public class OrderController {
     private final OrderService orderService;

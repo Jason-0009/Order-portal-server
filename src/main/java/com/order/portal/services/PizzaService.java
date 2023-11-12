@@ -1,21 +1,20 @@
-package com.awesome.pizza.services;
+package com.order.portal.services;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.access.prepost.PreAuthorize;
+
 import org.springframework.stereotype.Service;
 
-import lombok.RequiredArgsConstructor;
+import com.order.portal.models.Pizza;
+import com.order.portal.repositories.PizzaRepository;
 
-import com.awesome.pizza.models.Pizza;
-import com.awesome.pizza.repositories.PizzaRepository;
+import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
 public class PizzaService {
     private final PizzaRepository pizzaRepository;
 
-    @PreAuthorize("hasAnyScope('openid', 'profile')")
     public Page<Pizza> findAll(Pageable pageable) {
         return pizzaRepository.findAll(pageable);
     }

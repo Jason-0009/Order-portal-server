@@ -1,4 +1,4 @@
-package com.awesome.pizza.models.order;
+package com.order.portal.models.order;
 
 public enum OrderState {
     PENDING,

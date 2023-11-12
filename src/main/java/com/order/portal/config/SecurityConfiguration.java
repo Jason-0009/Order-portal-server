@@ -1,4 +1,4 @@
-package com.awesome.pizza.config;
+package com.order.portal.config;
 
 import java.util.Arrays;
 
@@ -17,9 +17,14 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+import lombok.RequiredArgsConstructor;
+
 @Configuration
 @EnableWebSecurity
+@RequiredArgsConstructor
 public class SecurityConfiguration {
+    private final OAuth2LoginSuccessHandler oAuth2LoginSuccessHandler;
+
     @Value("${client.url}")
     private String clientUrl;
 
@@ -30,7 +35,7 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(requests -> requests
                         .requestMatchers("/pizzas").authenticated()
                         .anyRequest().permitAll())
-                .oauth2Login(oauth2 -> oauth2.defaultSuccessUrl(clientUrl))
+                .oauth2Login(oauth2 -> oauth2.successHandler(oAuth2LoginSuccessHandler))
                 .logout(logout -> logout
                         .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                         .logoutSuccessUrl(clientUrl));
