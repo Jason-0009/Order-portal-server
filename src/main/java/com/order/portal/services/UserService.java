@@ -1,6 +1,12 @@
 package com.order.portal.services;
 
+import java.util.NoSuchElementException;
+
 import org.springframework.stereotype.Service;
+
+import org.springframework.security.access.AccessDeniedException;
+
+import org.springframework.security.core.Authentication;
 
 import com.order.portal.models.OAuthAccount;
 import com.order.portal.models.user.User;
@@ -15,10 +21,10 @@ public class UserService {
     private final AuthService authService;
     private final UserRepository userRepository;
 
-    public User getUserProfile() {
-        OAuthAccount oauthAccount = authService.getAuthenticatedOAuthAccount();
+    public User getUserProfile(Authentication authentication) throws AccessDeniedException {
+        OAuthAccount oauthAccount = authService.getAuthenticatedOAuthAccount(authentication);
 
         return userRepository.findById(oauthAccount.getUserId())
-                .orElseThrow(() -> new RuntimeException("User not found."));
+                .orElseThrow(() -> new NoSuchElementException("User not found."));
     }
 }

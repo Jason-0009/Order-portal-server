@@ -2,7 +2,8 @@ package com.order.portal.models.order;
 
 import lombok.Data;
 
-import java.sql.Date;
+import java.time.Instant;
+
 import java.util.List;
 
 import org.springframework.data.annotation.Id;
@@ -14,7 +15,7 @@ public class Order {
     @Id
     private String id;
     private String userId;
-    private Date date;
+    private Instant date;
     private Double totalPrice;
     private OrderState state;
     private List<OrderItem> items;

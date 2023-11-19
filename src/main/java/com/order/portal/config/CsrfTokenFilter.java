@@ -17,7 +17,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 public class CsrfTokenFilter extends OncePerRequestFilter {
-
     @Override
     protected void doFilterInternal(HttpServletRequest request,
             HttpServletResponse response, FilterChain filterChain)
@@ -46,6 +45,7 @@ public class CsrfTokenFilter extends OncePerRequestFilter {
         }
 
         cookie = createCsrfCookie(token);
+
         response.addCookie(cookie);
 
         filterChain.doFilter(request, response);
@@ -53,6 +53,7 @@ public class CsrfTokenFilter extends OncePerRequestFilter {
 
     private Cookie createCsrfCookie(String token) {
         Cookie cookie = new Cookie("XSRF-TOKEN", token);
+
         cookie.setPath("/");
 
         return cookie;
