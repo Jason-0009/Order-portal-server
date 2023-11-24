@@ -28,7 +28,6 @@ public class AuthService {
         if (!isAuthenticated(authentication)) throw new AccessDeniedException("User is not authenticated.");
 
         OidcUser principal = (OidcUser) authentication.getPrincipal();
-        
         String oauthUserId = principal.getAttribute("sub");
 
         return oauthAccountRepository.findByOauthUserId(oauthUserId)

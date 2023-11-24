@@ -1,5 +1,7 @@
 package com.order.portal.services;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -17,5 +19,9 @@ public class PizzaService {
 
     public Page<Pizza> findAll(Pageable pageable) {
         return pizzaRepository.findAll(pageable);
+    }
+
+    public Page<Pizza> findByIds(List<String> ids, Pageable pageable) {
+        return pizzaRepository.findByIdIn(ids, pageable);
     }
 }

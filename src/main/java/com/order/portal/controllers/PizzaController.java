@@ -1,5 +1,8 @@
 package com.order.portal.controllers;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -20,9 +23,10 @@ public class PizzaController {
     private final PizzaService pizzaService;
 
     @GetMapping
-    public ResponseEntity<Page<Pizza>> getPizzasPage(Pageable pageable) {
-        Page<Pizza> pizzas = pizzaService.findAll(pageable);
-        
+    public ResponseEntity<Page<Pizza>> getPizzasPage(@RequestParam Optional<List<String>> ids, Pageable pageable) {
+        Page<Pizza> pizzas = ids.isPresent() ? pizzaService.findByIds(ids.get(), pageable)
+                : pizzaService.findAll(pageable);
+
         return new ResponseEntity<>(pizzas, HttpStatus.OK);
     }
 }

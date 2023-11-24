@@ -3,7 +3,6 @@ package com.order.portal.services;
 import java.time.Instant;
 
 import java.util.NoSuchElementException;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -23,12 +22,11 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class OrderService {
-    private final OrderRepository orderRepository;
     private final AuthService authService;
+    private final OrderRepository orderRepository;
 
     public Page<Order> getOrdersByUser(Authentication authentication, Pageable pageable) throws AccessDeniedException {
         OAuthAccount oauthAccount = authService.getAuthenticatedOAuthAccount(authentication);
-
         String userId = oauthAccount.getUserId();
 
         return orderRepository.findByUserId(userId, pageable);
