@@ -1,7 +1,5 @@
 package com.order.portal.config;
 
-import java.util.Arrays;
-
 import org.springframework.beans.factory.annotation.Value;
 
 import org.springframework.context.annotation.Bean;
