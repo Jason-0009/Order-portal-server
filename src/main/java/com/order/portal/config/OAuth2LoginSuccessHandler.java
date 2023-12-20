@@ -17,7 +17,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 
 import com.order.portal.models.OAuthAccount;
-import com.order.portal.models.user.Role;
+import com.order.portal.models.user.UserRole;
 import com.order.portal.models.user.User;
 
 import com.order.portal.repositories.OAuthAccountRepository;
@@ -54,7 +54,7 @@ public class OAuth2LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHan
                     newUser.setName(name);
                     newUser.setEmail(email);
                     newUser.setImageUrl(imageUrl);
-                    newUser.setRole(Role.USER);
+                    newUser.setRole(UserRole.USER);
 
                     return userRepository.save(newUser);
                 });

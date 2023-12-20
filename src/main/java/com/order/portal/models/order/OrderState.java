@@ -4,5 +4,5 @@ public enum OrderState {
     PENDING,
     IN_CHARGE,
     SHIPPING,
-    SHIPPED;
+    SHIPPED
 }

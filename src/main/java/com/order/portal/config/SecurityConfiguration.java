@@ -39,7 +39,7 @@ public class SecurityConfiguration {
                         .csrfTokenRequestHandler(new CsrfTokenRequestAttributeHandler()))
                 .addFilterAfter(new CsrfTokenFilter(), CsrfFilter.class)
                 .authorizeHttpRequests(requests -> requests
-                        .requestMatchers("/api/pizzas", "/api/orders").authenticated()
+                        .requestMatchers("/api/products", "/api/orders").authenticated()
                         .anyRequest().permitAll())
                 .oauth2Login(oauth2 -> oauth2.successHandler(oauth2LoginSuccessHandler))
                 .logout(logout -> logout

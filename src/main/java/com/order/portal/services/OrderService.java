@@ -1,5 +1,7 @@
 package com.order.portal.services;
 
+import java.io.IOException;
+
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
@@ -7,12 +9,18 @@ import java.time.ZonedDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.*;
+
+import lombok.RequiredArgsConstructor;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import org.springframework.data.util.Pair;
 
 import org.springframework.http.HttpStatus;
+
+import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
+
 import org.springframework.web.server.ResponseStatusException;
 
 import org.springframework.stereotype.Service;
@@ -20,31 +28,39 @@ import org.springframework.stereotype.Service;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.Authentication;
 
-import lombok.RequiredArgsConstructor;
+import com.order.portal.repositories.OrderRepository;
 
 import com.order.portal.models.OAuthAccount;
 import com.order.portal.models.order.Order;
 import com.order.portal.models.order.OrderStatus;
 
-import com.order.portal.repositories.OrderRepository;
+import com.order.portal.websocket.OrderHandler;
+import com.order.portal.websocket.StatisticsHandler;
 
 @Service
 @RequiredArgsConstructor
 public class OrderService {
     private final OrderRepository orderRepository;
+
     private final AuthService authService;
+    private final NotificationService notificationService;
+
+    private final OrderHandler orderHandler;
+    private final StatisticsHandler statisticsHandler;
+
+    private final ObjectMapper objectMapper = new ObjectMapper().findAndRegisterModules();
 
     public Page<Order> retrieveOrders(Pageable pageable, Instant date, OrderStatus status) {
         List<Order> orders;
 
         if (date == null && status == null) {
-            orders = orderRepository.findAll();
+            orders = this.orderRepository.findAll();
 
             return sortOrders(orders, pageable);
         }
 
         if (date == null) {
-            orders = orderRepository.findByStatus(status);
+            orders = this.orderRepository.findByStatus(status);
 
             return sortOrders(orders, pageable);
         }
@@ -54,8 +70,8 @@ public class OrderService {
         Instant startOfDay = startAndEndOfDay.getFirst();
         Instant endOfDay = startAndEndOfDay.getSecond();
 
-        orders = (status == null) ? orderRepository.findByDateBetween(startOfDay, endOfDay)
-                : orderRepository.findByDateBetweenAndStatus(startOfDay, endOfDay, status);
+        orders = (status == null) ? this.orderRepository.findByDateBetween(startOfDay, endOfDay)
+                : this.orderRepository.findByDateBetweenAndStatus(startOfDay, endOfDay, status);
 
         return sortOrders(orders, pageable);
     }
@@ -64,18 +80,17 @@ public class OrderService {
                                                           Instant date, OrderStatus status) throws AccessDeniedException {
         List<Order> orders;
 
-        OAuthAccount oauthAccount = authService.retrieveAuthenticatedOAuthAccount(authentication);
-
+        OAuthAccount oauthAccount = this.authService.retrieveAuthenticatedOAuthAccount(authentication);
         String customerId = oauthAccount.getUserId();
 
         if (date == null && status == null) {
-            orders = orderRepository.findByCustomerId(customerId);
+            orders = this.orderRepository.findByCustomerId(customerId);
 
             return sortOrders(orders, pageable);
         }
 
         if (date == null) {
-            orders = orderRepository.findByCustomerIdAndStatus(customerId, status);
+            orders = this.orderRepository.findByCustomerIdAndStatus(customerId, status);
 
             return sortOrders(orders, pageable);
         }
@@ -85,8 +100,8 @@ public class OrderService {
         Instant startOfDay = startAndEndOfDay.getFirst();
         Instant endOfDay = startAndEndOfDay.getSecond();
 
-        orders = status == null ? orderRepository.findByCustomerIdAndDateBetween(customerId, startOfDay, endOfDay)
-                : orderRepository.findByCustomerIdAndDateBetweenAndStatus(customerId, startOfDay, endOfDay, status);
+        orders = status == null ? this.orderRepository.findByCustomerIdAndDateBetween(customerId, startOfDay, endOfDay)
+                : this.orderRepository.findByCustomerIdAndDateBetweenAndStatus(customerId, startOfDay, endOfDay, status);
 
         return sortOrders(orders, pageable);
     }
@@ -106,49 +121,37 @@ public class OrderService {
         return statistics;
     }
 
-    private long countOrdersDeliveredToday() {
-        ZonedDateTime now = ZonedDateTime.now(ZoneId.systemDefault());
-
-        Instant startOfDay = now
-                .toLocalDate()
-                .atStartOfDay(now.getZone())
-                .toInstant();
-
-        Instant endOfDay = now
-                .toLocalDate()
-                .plusDays(1)
-                .atStartOfDay(now.getZone())
-                .toInstant();
-
-        return this.orderRepository.countByDateBetweenAndStatus(startOfDay, endOfDay, OrderStatus.DELIVERED);
-    }
-
-    private long countPendingOrders() {
-        return this.orderRepository.countByStatus(OrderStatus.PENDING);
-    }
-
-    private long countDeliveringOrders() {
-        return this.orderRepository.countByStatus(OrderStatus.DELIVERING);
-    }
-
     public void submitNewOrderForUser(Authentication authentication, Order order) throws AccessDeniedException {
-        OAuthAccount oauthAccount = authService.retrieveAuthenticatedOAuthAccount(authentication);
+        OAuthAccount oauthAccount = this.authService.retrieveAuthenticatedOAuthAccount(authentication);
 
         order.setCustomerId(oauthAccount.getUserId());
         order.setDate(Instant.now());
 
-        orderRepository.save(order);
+        this.orderRepository.save(order);
     }
 
-    public void updateOrderStatus(String id, OrderStatus status) {
-        if (status == OrderStatus.IN_CHARGE && orderRepository.existsByStatus(OrderStatus.IN_CHARGE))
+    public void updateOrderStatus(Authentication authentication, String orderId, OrderStatus status) throws IOException {
+        boolean orderInChargeExists = this.orderRepository.existsByStatus(OrderStatus.IN_CHARGE);
+
+        if (status == OrderStatus.IN_CHARGE && orderInChargeExists)
             throw new ResponseStatusException(HttpStatus.CONFLICT, "Un ordine è già stato preso in carico.");
 
-        Order order = retrieveOrderById(id);
-
+        Order order = retrieveOrderById(orderId);
         order.setStatus(status);
 
-        orderRepository.save(order);
+        this.orderRepository.save(order);
+
+        if (!(authentication instanceof OAuth2AuthenticationToken token)) return;
+
+        String adminId = token.getPrincipal().getAttribute("sub");
+
+        this.sendUpdatedOrder(adminId, order);
+        this.sendUpdatedStatistics(adminId);
+
+        OAuthAccount customerAccount = this.authService.retrieveOAuthAccountByUserId(order.getCustomerId());
+        String notificationMessage = String.format("Lo stato dell'ordine %s è stato aggiornato.", order.getId());
+
+        notificationService.saveNotification(customerAccount, notificationMessage);
     }
 
     private Page<Order> sortOrders(List<Order> orders, Pageable pageable) {
@@ -170,7 +173,8 @@ public class OrderService {
     }
 
     private Pair<Instant, Instant> calculateStartAndEndOfDay(Instant date) {
-        ZonedDateTime dateTimeInUserZone = date.atZone(ZoneId.systemDefault());
+        ZoneId zoneId = ZoneId.systemDefault();
+        ZonedDateTime dateTimeInUserZone = date.atZone(zoneId);
 
         Instant startOfDay = dateTimeInUserZone
                 .toLocalDate()
@@ -179,10 +183,44 @@ public class OrderService {
 
         Instant endOfDay = dateTimeInUserZone
                 .toLocalDate()
-                .plusDays(1)
                 .atStartOfDay(dateTimeInUserZone.getZone())
+                .plusDays(1)
+                .minusNanos(1)
                 .toInstant();
 
         return Pair.of(startOfDay, endOfDay);
+    }
+
+    private long countOrdersDeliveredToday() {
+        Instant now = Instant.now();
+
+        Pair<Instant, Instant> startAndEndOfDay = calculateStartAndEndOfDay(now);
+
+        Instant startOfDay = startAndEndOfDay.getFirst();
+        Instant endOfDay = startAndEndOfDay.getSecond();
+
+        return this.orderRepository.countByDateBetweenAndStatus(startOfDay, endOfDay, OrderStatus.DELIVERED);
+    }
+
+    private long countPendingOrders() {
+        return this.orderRepository.countByStatus(OrderStatus.PENDING);
+    }
+
+    private long countDeliveringOrders() {
+        return this.orderRepository.countByStatus(OrderStatus.DELIVERING);
+    }
+
+    private void sendUpdatedOrder(String oauthUserId, Order order) throws IOException {
+        String orderJson = this.objectMapper.writeValueAsString(order);
+
+        orderHandler.sendMessage(oauthUserId, orderJson);
+    }
+    
+    private void sendUpdatedStatistics(String recipientId) throws IOException {
+        Map<String, Long> statistics = this.retrieveStatistics();
+
+        String statisticsJson = this.objectMapper.writeValueAsString(statistics);
+
+        statisticsHandler.sendMessage(recipientId, statisticsJson);
     }
 }
