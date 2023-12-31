@@ -149,9 +149,21 @@ public class OrderService {
         this.sendUpdatedStatistics(adminId);
 
         OAuthAccount customerAccount = this.authService.retrieveOAuthAccountByUserId(order.getCustomerId());
-        String notificationMessage = String.format("Lo stato dell'ordine %s è stato aggiornato.", order.getId());
 
-        notificationService.saveNotification(customerAccount, notificationMessage);
+        String statusName = status.name().toLowerCase();
+        String[] parts = statusName.split("_");
+
+        String messageCode = "orderStatus" +
+                parts[0].substring(0, 1).toUpperCase() +
+                parts[0].substring(1);
+
+        if (parts.length > 1)
+            messageCode += parts[1].substring(0, 1).toUpperCase() +
+                    parts[1].substring(1);
+
+        String redirectUrl = "/orders/" + orderId;
+
+        notificationService.saveNotification(customerAccount, messageCode, redirectUrl);
     }
 
     private Page<Order> sortOrders(List<Order> orders, Pageable pageable) {
@@ -215,7 +227,7 @@ public class OrderService {
 
         orderHandler.sendMessage(oauthUserId, orderJson);
     }
-    
+
     private void sendUpdatedStatistics(String recipientId) throws IOException {
         Map<String, Long> statistics = this.retrieveStatistics();
 

@@ -1,4 +1,4 @@
-package com.order.portal.config;
+package com.order.portal.config.handlers;
 
 import org.springframework.web.bind.annotation.*;
 

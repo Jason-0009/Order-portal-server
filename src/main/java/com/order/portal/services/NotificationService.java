@@ -49,12 +49,13 @@ public class NotificationService {
         this.notificationRepository.deleteByUserId(userId);
     }
 
-    public void saveNotification(OAuthAccount oauthAccount, String message) throws IOException {
+    public void saveNotification(OAuthAccount oauthAccount, String messageCode, String redirectUrl) throws IOException {
         Notification notification = new Notification();
 
         notification.setUserId(oauthAccount.getUserId());
-        notification.setMessage(message);
+        notification.setMessageCode(messageCode);
         notification.setDate(Instant.now());
+        notification.setRedirectUrl(redirectUrl);
 
         notificationRepository.save(notification);
 

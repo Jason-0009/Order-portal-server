@@ -1,20 +1,19 @@
-package com.order.portal.config;
+package com.order.portal.config.handlers;
 
 import java.io.IOException;
 
-import org.springframework.beans.factory.annotation.Value;
-
-import org.springframework.security.core.Authentication;
-import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
-
-import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
+import lombok.RequiredArgsConstructor;
 
 import org.springframework.stereotype.Component;
 
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.security.core.Authentication;
 
-import lombok.RequiredArgsConstructor;
+import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
+import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
+
+import org.springframework.beans.factory.annotation.Value;
+
+import jakarta.servlet.http.*;
 
 import com.order.portal.models.OAuthAccount;
 import com.order.portal.models.user.UserRole;
@@ -34,7 +33,7 @@ public class OAuth2LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHan
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
-            Authentication authentication) throws IOException {
+                                        Authentication authentication) throws IOException {
         OAuth2AuthenticationToken token = (OAuth2AuthenticationToken) authentication;
 
         String email = token.getPrincipal().getAttribute("email");
@@ -55,6 +54,7 @@ public class OAuth2LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHan
                     newUser.setEmail(email);
                     newUser.setImageUrl(imageUrl);
                     newUser.setRole(UserRole.USER);
+                    newUser.setPreferredLanguage("it");
 
                     return userRepository.save(newUser);
                 });
@@ -73,6 +73,11 @@ public class OAuth2LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHan
                             oauthAccountRepository.save(newOAuthAccount);
                         });
 
-        response.sendRedirect(clientUrl);
+        String redirectUrl = clientUrl;
+
+        if (!user.getPreferredLanguage().equals("it"))
+            redirectUrl += "/" + user.getPreferredLanguage();
+
+        response.sendRedirect(redirectUrl);
     }
 }

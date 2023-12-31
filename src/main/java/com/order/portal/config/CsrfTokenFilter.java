@@ -2,20 +2,17 @@ package com.order.portal.config;
 
 import java.io.IOException;
 
-import lombok.NonNull;
+import org.springframework.lang.NonNull;
+
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.csrf.CsrfToken;
 
 import org.springframework.web.filter.OncePerRequestFilter;
 import org.springframework.web.util.WebUtils;
 
-import jakarta.servlet.FilterChain;
+import jakarta.servlet.*;
 
-import jakarta.servlet.ServletException;
-
-import jakarta.servlet.http.Cookie;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.*;
 
 public class CsrfTokenFilter extends OncePerRequestFilter {
     @Override
@@ -29,16 +26,16 @@ public class CsrfTokenFilter extends OncePerRequestFilter {
             return;
         }
 
-        CsrfToken csrf = (CsrfToken) request.getAttribute(CsrfToken.class.getName());
+        CsrfToken csrfToken = (CsrfToken) request.getAttribute(CsrfToken.class.getName());
 
-        if (csrf == null) {
+        if (csrfToken == null) {
             filterChain.doFilter(request, response);
 
             return;
         }
 
         Cookie cookie = WebUtils.getCookie(request, "XSRF-TOKEN");
-        String token = csrf.getToken();
+        String token = csrfToken.getToken();
 
         if (cookie != null && token != null && token.equals(cookie.getValue())) {
             filterChain.doFilter(request, response);
@@ -55,7 +52,6 @@ public class CsrfTokenFilter extends OncePerRequestFilter {
 
     private Cookie createCsrfCookie(String token) {
         Cookie cookie = new Cookie("XSRF-TOKEN", token);
-
         cookie.setPath("/");
 
         return cookie;

@@ -24,8 +24,8 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping
-    public Page<User> retrieveUsers(Pageable pageable) {
-        return this.userService.retrieveUsers(pageable);
+    public Page<User> retrieveUsers(Pageable pageable, @RequestParam(required = false) String searchTerm) {
+        return this.userService.retrieveUsers(pageable, searchTerm);
     }
 
     @GetMapping("/profile")
@@ -33,8 +33,16 @@ public class UserController {
         return this.userService.retrieveAuthenticatedUserProfile(authentication);
     }
 
-    @PutMapping("/{userId}")
-    public void updateUserRole(Authentication authentication, @PathVariable String userId, @RequestBody UserRole role) throws IOException {
+    @PutMapping("/{userId}/role")
+    public void updateUserRole(Authentication authentication,
+                               @PathVariable String userId,
+                               @RequestBody UserRole role) throws IOException {
         this.userService.updateUserRole(authentication, userId, role);
+    }
+
+    @PutMapping("/{userId}/preferredLanguage")
+    public void updateUserPreferredLanguage(@PathVariable String userId,
+                                            @RequestBody String preferredLanguage) {
+        this.userService.updateUserPreferredLanguage(userId, preferredLanguage);
     }
 }

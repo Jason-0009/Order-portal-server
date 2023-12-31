@@ -14,4 +14,5 @@ public class User {
     private String email;
     private UserRole role;
     private String imageUrl;
+    private String preferredLanguage;
 }

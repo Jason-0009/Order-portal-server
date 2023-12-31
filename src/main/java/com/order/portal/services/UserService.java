@@ -4,7 +4,10 @@ import java.util.NoSuchElementException;
 
 import java.io.IOException;
 
+import lombok.RequiredArgsConstructor;
+
 import org.springframework.stereotype.Service;
+
 import org.springframework.data.domain.*;
 
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
@@ -23,8 +26,6 @@ import com.order.portal.models.OAuthAccount;
 
 import com.order.portal.websocket.UserHandler;
 
-import lombok.RequiredArgsConstructor;
-
 @Service
 @RequiredArgsConstructor
 public class UserService {
@@ -37,8 +38,11 @@ public class UserService {
 
     private final ObjectMapper objectMapper = new ObjectMapper().findAndRegisterModules();
 
-    public Page<User> retrieveUsers(Pageable pageable) {
-        return this.userRepository.findAll(pageable);
+    public Page<User> retrieveUsers(Pageable pageable, String searchTerm) {
+        if (searchTerm == null || searchTerm.isEmpty())
+            return this.userRepository.findAll(pageable);
+
+        return this.userRepository.findByNameContainingIgnoreCase(pageable, searchTerm);
     }
 
     public User retrieveAuthenticatedUserProfile(Authentication authentication) throws AccessDeniedException {
@@ -60,9 +64,23 @@ public class UserService {
         this.sendUpdatedUser(adminId, user);
 
         OAuthAccount userAccount = this.authService.retrieveOAuthAccountByUserId(userId);
-        String notificationMessage = String.format("Il tuo ruolo è stato aggiornato ad %s", role);
 
-        notificationService.saveNotification(userAccount, notificationMessage);
+        String messageCode = "roleUpdatedTo" + role.name().substring(0, 1).toUpperCase() +
+                role.name().substring(1).toLowerCase();
+
+        String redirectUrl = null;
+
+        if (user.getRole() == UserRole.ADMIN)
+            redirectUrl = "/users";
+
+        notificationService.saveNotification(userAccount, messageCode, redirectUrl);
+    }
+
+    public void updateUserPreferredLanguage(String userId, String preferredLanguage) {
+        User user = this.retrieveUserById(userId);
+        user.setPreferredLanguage(preferredLanguage);
+
+        this.userRepository.save(user);
     }
 
     private User retrieveUserById(String id) {

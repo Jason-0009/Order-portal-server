@@ -1,6 +1,6 @@
 package com.order.portal.models;
 
-import java.util.List;
+import java.util.*;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -13,7 +13,7 @@ public class Product {
     @Id
     private String id;
     private String imageUrl;
-    private String name;
-    private List<String> ingredients;
+    private Map<String, String> name;
+    private Map<String, List<String>> ingredients;
     private float price;
 }
