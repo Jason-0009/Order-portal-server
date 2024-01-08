@@ -1,9 +1,0 @@
-[{
-  "_id": {
-    "$oid": "659181758cc9074708964c25"
-  },
-  "oauthUserId": "103966707286910328532",
-  "provider": "google",
-  "userId": "659181758cc9074708964c24",
-  "_class": "com.order.portal.models.OAuthAccount"
-}]
