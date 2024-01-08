@@ -1,6 +1,8 @@
 FROM openjdk:17
-VOLUME /tmp
+
+WORKDIR /app
+COPY ./build/libs/order-portal-0.0.1-SNAPSHOT.jar /app
+
 EXPOSE 8080
-ARG JAR_FILE=target/spring-boot-docker.jar
-ADD ${JAR_FILE} app.jar
-ENTRYPOINT ["java","-jar","/app.jar"]
+
+CMD ["java", "-jar", "order-portal-0.0.1-SNAPSHOT.jar"]
