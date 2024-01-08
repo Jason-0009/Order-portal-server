@@ -24,8 +24,10 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping
-    public Page<User> retrieveUsers(Pageable pageable, @RequestParam(required = false) String searchTerm) {
-        return this.userService.retrieveUsers(pageable, searchTerm);
+    public Page<User> retrieveUsers(Authentication authentication,
+                                    Pageable pageable,
+                                    @RequestParam(required = false) String searchTerm) {
+        return this.userService.retrieveUsers(authentication, pageable, searchTerm);
     }
 
     @GetMapping("/profile")
@@ -33,6 +35,11 @@ public class UserController {
         return this.userService.retrieveAuthenticatedUserProfile(authentication);
     }
 
+    @GetMapping("/{userId}")
+    public User retrieveUser(@PathVariable String userId) throws AccessDeniedException {
+        return this.userService.retrieveUserById(userId);
+    }
+    
     @PutMapping("/{userId}/role")
     public void updateUserRole(Authentication authentication,
                                @PathVariable String userId,

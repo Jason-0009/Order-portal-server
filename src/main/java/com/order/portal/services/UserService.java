@@ -11,9 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.data.domain.*;
 
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
-
 import org.springframework.security.access.AccessDeniedException;
-
 import org.springframework.security.core.Authentication;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -38,11 +36,15 @@ public class UserService {
 
     private final ObjectMapper objectMapper = new ObjectMapper().findAndRegisterModules();
 
-    public Page<User> retrieveUsers(Pageable pageable, String searchTerm) {
-        if (searchTerm == null || searchTerm.isEmpty())
-            return this.userRepository.findAll(pageable);
+    public Page<User> retrieveUsers(Authentication authentication, Pageable pageable, String searchTerm) {
+        OAuthAccount oauthAccount = this.authService.retrieveAuthenticatedOAuthAccount(authentication);
 
-        return this.userRepository.findByNameContainingIgnoreCase(pageable, searchTerm);
+        String authenticatedUserId = oauthAccount.getUserId();
+
+        if (searchTerm == null || searchTerm.isEmpty())
+            return this.userRepository.findByIdNot(pageable, authenticatedUserId);
+
+        return this.userRepository.findByNameContainingIgnoreCaseAndIdNot(pageable, searchTerm, authenticatedUserId);
     }
 
     public User retrieveAuthenticatedUserProfile(Authentication authentication) throws AccessDeniedException {
@@ -83,7 +85,7 @@ public class UserService {
         this.userRepository.save(user);
     }
 
-    private User retrieveUserById(String id) {
+    public User retrieveUserById(String id) {
         return this.userRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("User not found."));
     }

@@ -134,7 +134,7 @@ public class OrderService {
         boolean orderInChargeExists = this.orderRepository.existsByStatus(OrderStatus.IN_CHARGE);
 
         if (status == OrderStatus.IN_CHARGE && orderInChargeExists)
-            throw new ResponseStatusException(HttpStatus.CONFLICT, "Un ordine è già stato preso in carico.");
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "orderAlreadyInCharge");
 
         Order order = retrieveOrderById(orderId);
         order.setStatus(status);
