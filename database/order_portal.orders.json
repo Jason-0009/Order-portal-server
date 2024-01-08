@@ -1,0 +1,600 @@
+[{
+  "_id": {
+    "$oid": "65919b428cc9074708964c27"
+  },
+  "customerId": "659181758cc9074708964c24",
+  "date": {
+    "$date": "2023-12-31T16:48:02.198Z"
+  },
+  "totalPrice": 11,
+  "status": "PENDING",
+  "items": [
+    {
+      "_id": {
+        "$oid": "655de50a267893345345b944"
+      },
+      "quantity": 1
+    },
+    {
+      "_id": {
+        "$oid": "655de555267893345345b945"
+      },
+      "quantity": 1
+    }
+  ],
+  "_class": "com.order.portal.models.order.Order"
+},
+{
+  "_id": {
+    "$oid": "6591ab808cc9074708964c2b"
+  },
+  "customerId": "659181758cc9074708964c24",
+  "date": {
+    "$date": "2023-12-31T17:57:20.670Z"
+  },
+  "totalPrice": 6,
+  "status": "PENDING",
+  "items": [
+    {
+      "_id": {
+        "$oid": "655de555267893345345b945"
+      },
+      "quantity": 1
+    }
+  ],
+  "_class": "com.order.portal.models.order.Order"
+},
+{
+  "_id": {
+    "$oid": "6599a907d79153606bd9e3a9"
+  },
+  "customerId": "659181758cc9074708964c24",
+  "date": {
+    "$date": "2024-01-06T19:24:55.702Z"
+  },
+  "totalPrice": 28,
+  "status": "PENDING",
+  "items": [
+    {
+      "_id": {
+        "$oid": "655de555267893345345b945"
+      },
+      "quantity": 1
+    },
+    {
+      "_id": {
+        "$oid": "655de579267893345345b94b"
+      },
+      "quantity": 1
+    },
+    {
+      "_id": {
+        "$oid": "655de57e267893345345b94c"
+      },
+      "quantity": 1
+    },
+    {
+      "_id": {
+        "$oid": "655de570267893345345b949"
+      },
+      "quantity": 1
+    }
+  ],
+  "_class": "com.order.portal.models.order.Order"
+},
+{
+  "_id": {
+    "$oid": "6599d3a2d79153606bd9e3aa"
+  },
+  "customerId": "659181758cc9074708964c24",
+  "date": {
+    "$date": "2024-01-06T22:26:42.450Z"
+  },
+  "totalPrice": 58,
+  "status": "PENDING",
+  "items": [
+    {
+      "_id": {
+        "$oid": "655de555267893345345b945"
+      },
+      "quantity": 1
+    },
+    {
+      "_id": {
+        "$oid": "655de50a267893345345b944"
+      },
+      "quantity": 1
+    },
+    {
+      "_id": {
+        "$oid": "655de570267893345345b949"
+      },
+      "quantity": 6
+    },
+    {
+      "_id": {
+        "$oid": "655de567267893345345b948"
+      },
+      "quantity": 1
+    }
+  ],
+  "_class": "com.order.portal.models.order.Order"
+},
+{
+  "_id": {
+    "$oid": "6599d3a7d79153606bd9e3ab"
+  },
+  "customerId": "659181758cc9074708964c24",
+  "date": {
+    "$date": "2024-01-06T22:26:47.868Z"
+  },
+  "totalPrice": 12,
+  "status": "PENDING",
+  "items": [
+    {
+      "_id": {
+        "$oid": "655de55f267893345345b947"
+      },
+      "quantity": 1
+    },
+    {
+      "_id": {
+        "$oid": "655de567267893345345b948"
+      },
+      "quantity": 1
+    }
+  ],
+  "_class": "com.order.portal.models.order.Order"
+},
+{
+  "_id": {
+    "$oid": "6599d3add79153606bd9e3ac"
+  },
+  "customerId": "659181758cc9074708964c24",
+  "date": {
+    "$date": "2024-01-06T22:26:53.570Z"
+  },
+  "totalPrice": 15,
+  "status": "PENDING",
+  "items": [
+    {
+      "_id": {
+        "$oid": "655de579267893345345b94b"
+      },
+      "quantity": 1
+    },
+    {
+      "_id": {
+        "$oid": "655de57e267893345345b94c"
+      },
+      "quantity": 1
+    }
+  ],
+  "_class": "com.order.portal.models.order.Order"
+},
+{
+  "_id": {
+    "$oid": "659a952e2cc2c87036e92c64"
+  },
+  "customerId": "659181758cc9074708964c24",
+  "date": {
+    "$date": "2024-01-07T12:12:30.077Z"
+  },
+  "totalPrice": 123,
+  "status": "PENDING",
+  "items": [
+    {
+      "_id": {
+        "$oid": "655de57e267893345345b94d"
+      },
+      "quantity": 1
+    },
+    {
+      "_id": {
+        "$oid": "655de57e267893345345b950"
+      },
+      "quantity": 1
+    },
+    {
+      "_id": {
+        "$oid": "655de57e267893345345b94e"
+      },
+      "quantity": 1
+    },
+    {
+      "_id": {
+        "$oid": "655de55a267893345345b946"
+      },
+      "quantity": 1
+    },
+    {
+      "_id": {
+        "$oid": "655de57e267893345345b960"
+      },
+      "quantity": 1
+    },
+    {
+      "_id": {
+        "$oid": "655de57e267893345345b94f"
+      },
+      "quantity": 1
+    },
+    {
+      "_id": {
+        "$oid": "655de57e267893345345b95b"
+      },
+      "quantity": 1
+    },
+    {
+      "_id": {
+        "$oid": "655de57e267893345345b95c"
+      },
+      "quantity": 1
+    },
+    {
+      "_id": {
+        "$oid": "655de570267893345345b949"
+      },
+      "quantity": 1
+    },
+    {
+      "_id": {
+        "$oid": "655de575267893345345b94a"
+      },
+      "quantity": 1
+    },
+    {
+      "_id": {
+        "$oid": "655de55f267893345345b947"
+      },
+      "quantity": 1
+    },
+    {
+      "_id": {
+        "$oid": "655de57e267893345345b95a"
+      },
+      "quantity": 1
+    },
+    {
+      "_id": {
+        "$oid": "655de57e267893345345b95f"
+      },
+      "quantity": 1
+    },
+    {
+      "_id": {
+        "$oid": "655de57e267893345345b962"
+      },
+      "quantity": 1
+    },
+    {
+      "_id": {
+        "$oid": "655de57e267893345345b94c"
+      },
+      "quantity": 1
+    }
+  ],
+  "_class": "com.order.portal.models.order.Order"
+},
+{
+  "_id": {
+    "$oid": "659b041cd7860b7f6d58a08b"
+  },
+  "customerId": "659181758cc9074708964c24",
+  "date": {
+    "$date": "2024-01-07T20:05:48.552Z"
+  },
+  "totalPrice": 11,
+  "status": "PENDING",
+  "items": [
+    {
+      "_id": {
+        "$oid": "655de555267893345345b945"
+      },
+      "quantity": 1
+    },
+    {
+      "_id": {
+        "$oid": "655de50a267893345345b944"
+      },
+      "quantity": 1
+    }
+  ],
+  "_class": "com.order.portal.models.order.Order"
+},
+{
+  "_id": {
+    "$oid": "659b26f5d7860b7f6d58a08f"
+  },
+  "customerId": "659181758cc9074708964c24",
+  "date": {
+    "$date": "2024-01-07T22:34:29.206Z"
+  },
+  "totalPrice": 19,
+  "status": "PENDING",
+  "items": [
+    {
+      "_id": {
+        "$oid": "655de555267893345345b945"
+      },
+      "quantity": 1
+    },
+    {
+      "_id": {
+        "$oid": "655de50a267893345345b944"
+      },
+      "quantity": 1
+    },
+    {
+      "_id": {
+        "$oid": "655de57e267893345345b94d"
+      },
+      "quantity": 1
+    }
+  ],
+  "_class": "com.order.portal.models.order.Order"
+},
+{
+  "_id": {
+    "$oid": "659b2865d7860b7f6d58a093"
+  },
+  "customerId": "659181758cc9074708964c24",
+  "date": {
+    "$date": "2024-01-07T22:40:37.246Z"
+  },
+  "totalPrice": 14,
+  "status": "PENDING",
+  "items": [
+    {
+      "_id": {
+        "$oid": "655de555267893345345b945"
+      },
+      "quantity": 1
+    },
+    {
+      "_id": {
+        "$oid": "655de57e267893345345b94d"
+      },
+      "quantity": 1
+    }
+  ],
+  "_class": "com.order.portal.models.order.Order"
+},
+{
+  "_id": {
+    "$oid": "659b3b2fd7860b7f6d58a097"
+  },
+  "customerId": "659181758cc9074708964c24",
+  "date": {
+    "$date": "2024-01-08T00:00:47.385Z"
+  },
+  "totalPrice": 22,
+  "status": "PENDING",
+  "items": [
+    {
+      "_id": {
+        "$oid": "655de57e267893345345b951"
+      },
+      "quantity": 1
+    },
+    {
+      "_id": {
+        "$oid": "655de57e267893345345b94d"
+      },
+      "quantity": 1
+    },
+    {
+      "_id": {
+        "$oid": "655de555267893345345b945"
+      },
+      "quantity": 1
+    }
+  ],
+  "_class": "com.order.portal.models.order.Order"
+},
+{
+  "_id": {
+    "$oid": "659b3df4d7860b7f6d58a09b"
+  },
+  "customerId": "659181758cc9074708964c24",
+  "date": {
+    "$date": "2024-01-08T00:12:36.404Z"
+  },
+  "totalPrice": 6,
+  "status": "DELIVERING",
+  "items": [
+    {
+      "_id": {
+        "$oid": "655de555267893345345b945"
+      },
+      "quantity": 1
+    }
+  ],
+  "_class": "com.order.portal.models.order.Order"
+},
+{
+  "_id": {
+    "$oid": "659b4033d7860b7f6d58a09f"
+  },
+  "customerId": "659181758cc9074708964c24",
+  "date": {
+    "$date": "2024-01-08T00:22:11.495Z"
+  },
+  "totalPrice": 19,
+  "status": "PENDING",
+  "items": [
+    {
+      "_id": {
+        "$oid": "655de555267893345345b945"
+      },
+      "quantity": 1
+    },
+    {
+      "_id": {
+        "$oid": "655de57e267893345345b94d"
+      },
+      "quantity": 1
+    },
+    {
+      "_id": {
+        "$oid": "655de50a267893345345b944"
+      },
+      "quantity": 1
+    }
+  ],
+  "_class": "com.order.portal.models.order.Order"
+},
+{
+  "_id": {
+    "$oid": "659b4369d7860b7f6d58a0a2"
+  },
+  "customerId": "659181758cc9074708964c24",
+  "date": {
+    "$date": "2024-01-08T00:35:53.220Z"
+  },
+  "totalPrice": 14,
+  "status": "PENDING",
+  "items": [
+    {
+      "_id": {
+        "$oid": "655de57e267893345345b94d"
+      },
+      "quantity": 1
+    },
+    {
+      "_id": {
+        "$oid": "655de555267893345345b945"
+      },
+      "quantity": 1
+    }
+  ],
+  "_class": "com.order.portal.models.order.Order"
+},
+{
+  "_id": {
+    "$oid": "659b4373d7860b7f6d58a0a4"
+  },
+  "customerId": "659181758cc9074708964c24",
+  "date": {
+    "$date": "2024-01-08T00:36:03.406Z"
+  },
+  "totalPrice": 37,
+  "status": "DELIVERED",
+  "items": [
+    {
+      "_id": {
+        "$oid": "655de57e267893345345b951"
+      },
+      "quantity": 1
+    },
+    {
+      "_id": {
+        "$oid": "655de57e267893345345b950"
+      },
+      "quantity": 1
+    },
+    {
+      "_id": {
+        "$oid": "655de555267893345345b945"
+      },
+      "quantity": 1
+    },
+    {
+      "_id": {
+        "$oid": "655de57e267893345345b94d"
+      },
+      "quantity": 1
+    },
+    {
+      "_id": {
+        "$oid": "655de50a267893345345b944"
+      },
+      "quantity": 1
+    }
+  ],
+  "_class": "com.order.portal.models.order.Order"
+},
+{
+  "_id": {
+    "$oid": "659b4722d7860b7f6d58a0a6"
+  },
+  "customerId": "659181758cc9074708964c24",
+  "date": {
+    "$date": "2024-01-08T00:51:46.704Z"
+  },
+  "totalPrice": 14,
+  "status": "DELIVERED",
+  "items": [
+    {
+      "_id": {
+        "$oid": "655de555267893345345b945"
+      },
+      "quantity": 1
+    },
+    {
+      "_id": {
+        "$oid": "655de57e267893345345b94d"
+      },
+      "quantity": 1
+    }
+  ],
+  "_class": "com.order.portal.models.order.Order"
+},
+{
+  "_id": {
+    "$oid": "659b4c9cd7860b7f6d58a0a7"
+  },
+  "customerId": "659181758cc9074708964c24",
+  "date": {
+    "$date": "2024-01-08T01:15:08.191Z"
+  },
+  "totalPrice": 33,
+  "status": "DELIVERED",
+  "items": [
+    {
+      "_id": {
+        "$oid": "655de57e267893345345b94d"
+      },
+      "quantity": 1
+    },
+    {
+      "_id": {
+        "$oid": "655de57e267893345345b95f"
+      },
+      "quantity": 1
+    },
+    {
+      "_id": {
+        "$oid": "655de57e267893345345b94c"
+      },
+      "quantity": 1
+    },
+    {
+      "_id": {
+        "$oid": "655de57e267893345345b962"
+      },
+      "quantity": 1
+    }
+  ],
+  "_class": "com.order.portal.models.order.Order"
+},
+{
+  "_id": {
+    "$oid": "659c1297cd8a953fac5438bc"
+  },
+  "customerId": "659181758cc9074708964c24",
+  "date": {
+    "$date": "2024-01-08T15:19:51.715Z"
+  },
+  "totalPrice": 7,
+  "status": "PENDING",
+  "items": [
+    {
+      "_id": {
+        "$oid": "655de57e267893345345b94d"
+      },
+      "quantity": 1
+    }
+  ],
+  "_class": "com.order.portal.models.order.Order"
+}]
