@@ -1,8 +1,6 @@
-FROM openjdk:17
-
-WORKDIR /app
-COPY ./build/libs/order-portal-0.0.1-SNAPSHOT.jar /app
-
+FROM openjdk:11
+VOLUME /tmp
 EXPOSE 8080
-
-CMD ["java", "-jar", "order-portal-0.0.1-SNAPSHOT.jar"]
+ARG JAR_FILE=libs/order-portal-0.0.1-SNAPSHOT.jar
+ADD ${JAR_FILE} app.jar
+ENTRYPOINT ["java","-jar","/app.jar"]
