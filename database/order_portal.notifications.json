@@ -1,0 +1,13 @@
+[{
+  "_id": {
+    "$oid": "659c129dcd8a953fac5438bd"
+  },
+  "userId": "659181758cc9074708964c24",
+  "messageCode": "orderStatusDelivering",
+  "date": {
+    "$date": "2024-01-08T15:19:57.118Z"
+  },
+  "readStatus": true,
+  "redirectUrl": "/orders/659b3df4d7860b7f6d58a09b",
+  "_class": "com.order.portal.models.Notification"
+}]
