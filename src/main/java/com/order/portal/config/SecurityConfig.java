@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 
 import org.springframework.security.web.SecurityFilterChain;
 
+import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.security.web.csrf.*;
 
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
@@ -37,7 +38,7 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf
                         .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
                         .csrfTokenRequestHandler(new CsrfTokenRequestAttributeHandler()))
-                .addFilterAfter(new CsrfTokenFilter(), CsrfFilter.class)
+                .addFilterAfter(new CookieCsrfFilter(), BasicAuthenticationFilter.class)
                 .authorizeHttpRequests(requests -> requests
                         .requestMatchers("/api/products", "/api/orders").authenticated()
                         .anyRequest().permitAll())
