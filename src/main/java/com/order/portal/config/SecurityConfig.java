@@ -2,6 +2,7 @@ package com.order.portal.config;
 
 import org.springframework.beans.factory.annotation.Value;
 
+import org.springframework.boot.web.servlet.server.CookieSameSiteSupplier;
 import org.springframework.context.annotation.*;
 
 import org.springframework.security.config.Customizer;
