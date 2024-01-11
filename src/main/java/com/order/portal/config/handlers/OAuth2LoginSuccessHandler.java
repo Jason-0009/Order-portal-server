@@ -79,7 +79,7 @@ public class OAuth2LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHan
         String redirectUrl = clientUrl + "/oauth/redirect?token=" + idToken;
 
         if (!user.getPreferredLanguage().equals("it"))
-            redirectUrl += "&prefferedLanguage=" + user.getPreferredLanguage();
+            redirectUrl += "&preferredLanguage=" + user.getPreferredLanguage();
 
         response.sendRedirect(redirectUrl);
     }
