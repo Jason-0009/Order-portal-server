@@ -1,0 +1,713 @@
+[{
+  "_id": {
+    "$oid": "655de50a267893345345b944"
+  },
+  "name": {
+    "it": "Margherita",
+    "en": "Margherita"
+  },
+  "ingredients": {
+    "it": [
+      "Passata di pomodoro",
+      "Mozzarella fiordilatte",
+      "Basilico"
+    ],
+    "en": [
+      "Tomato sauce",
+      "Mozzarella fiordilatte",
+      "Basil"
+    ]
+  },
+  "price": 5,
+  "imageUrl": "/images/products/margherita.png"
+},
+{
+  "_id": {
+    "$oid": "655de555267893345345b945"
+  },
+  "name": {
+    "it": "Diavola",
+    "en": "Spicy"
+  },
+  "ingredients": {
+    "it": [
+      "Passata di pomodoro",
+      "Mozzarella fiordilatte",
+      "Salame piccante"
+    ],
+    "en": [
+      "Tomato sauce",
+      "Mozzarella fiordilatte",
+      "Spicy salami"
+    ]
+  },
+  "price": 6,
+  "imageUrl": "/images/products/spicy.png"
+},
+{
+  "_id": {
+    "$oid": "655de57e267893345345b94d"
+  },
+  "name": {
+    "it": "Capricciosa",
+    "en": "Capricious"
+  },
+  "ingredients": {
+    "it": [
+      "Passata di pomodoro",
+      "Mozzarella fiordilatte",
+      "Funghi",
+      "Carciofi",
+      "Prosciutto cotto",
+      "Olive nere"
+    ],
+    "en": [
+      "Tomato sauce",
+      "Mozzarella fiordilatte",
+      "Mushrooms",
+      "Artichokes",
+      "Cooked ham",
+      "Black olives"
+    ]
+  },
+  "price": 7,
+  "imageUrl": "/images/products/capricious.png"
+},
+{
+  "_id": {
+    "$oid": "655de57e267893345345b94e"
+  },
+  "name": {
+    "it": "Napoletana",
+    "en": "Neapolitan"
+  },
+  "ingredients": {
+    "it": [
+      "Passata di pomodoro",
+      "Mozzarella fiordilatte",
+      "Acciughe",
+      "Capperi",
+      "Olive nere"
+    ],
+    "en": [
+      "Tomato sauce",
+      "Mozzarella fiordilatte",
+      "Anchovies",
+      "Capers",
+      "Black olives"
+    ]
+  },
+  "price": 7,
+  "imageUrl": "/images/products/neapolitan.png"
+},
+{
+  "_id": {
+    "$oid": "655de57e267893345345b950"
+  },
+  "name": {
+    "it": "Frutti di mare",
+    "en": "Seafood"
+  },
+  "ingredients": {
+    "it": [
+      "Passata di pomodoro",
+      "Mozzarella fiordilatte",
+      "Frutti di mare",
+      "Aglio"
+    ],
+    "en": [
+      "Tomato sauce",
+      "Mozzarella fiordilatte",
+      "Seafood",
+      "Garlic"
+    ]
+  },
+  "price": 10,
+  "imageUrl": "/images/products/seafood.png"
+},
+{
+  "_id": {
+    "$oid": "655de57e267893345345b94f"
+  },
+  "name": {
+    "it": "Quattro stagioni",
+    "en": "Four seasons"
+  },
+  "ingredients": {
+    "it": [
+      "Passata di pomodoro",
+      "Mozzarella fiordilatte",
+      "Funghi",
+      "Carciofi",
+      "Prosciutto cotto",
+      "Olive nere"
+    ],
+    "en": [
+      "Tomato sauce",
+      "Mozzarella fiordilatte",
+      "Mushrooms",
+      "Artichokes",
+      "Cooked ham",
+      "Black olives"
+    ]
+  },
+  "price": 7,
+  "imageUrl": "/images/products/four_seasons.png"
+},
+{
+  "_id": {
+    "$oid": "655de55a267893345345b946"
+  },
+  "name": {
+    "it": "Prosciutto e funghi",
+    "en": "Ham and mushrooms"
+  },
+  "ingredients": {
+    "it": [
+      "Passata di pomodoro",
+      "Mozzarella fiordilatte",
+      "Prosciutto cotto",
+      "Funghi"
+    ],
+    "en": [
+      "Tomato sauce",
+      "Mozzarella fiordilatte",
+      "Cooked ham",
+      "Mushrooms"
+    ]
+  },
+  "price": 6,
+  "imageUrl": "/images/products/ham_and_mushrooms.png"
+},
+{
+  "_id": {
+    "$oid": "655de57e267893345345b960"
+  },
+  "name": {
+    "it": "Prosciutto crudo",
+    "en": "Raw ham"
+  },
+  "ingredients": {
+    "it": [
+      "Mozzarella fiordilatte",
+      "Prosciutto crudo"
+    ],
+    "en": [
+      "Mozzarella fiordilatte",
+      "Raw ham"
+    ]
+  },
+  "price": 6,
+  "imageUrl": "/images/products/raw_ham.png"
+},
+{
+  "_id": {
+    "$oid": "655de57e267893345345b961"
+  },
+  "name": {
+    "it": "Prosciutto e melone",
+    "en": "Ham and melon"
+  },
+  "ingredients": {
+    "it": [
+      "Mozzarella fiordilatte",
+      "Prosciutto crudo",
+      "Melone"
+    ],
+    "en": [
+      "Mozzarella fiordilatte",
+      "Raw ham",
+      "Melon"
+    ]
+  },
+  "price": 7,
+  "imageUrl": "/images/products/ham_and_melon.png"
+},
+{
+  "_id": {
+    "$oid": "655de55f267893345345b947"
+  },
+  "name": {
+    "it": "Tonno e cipolle",
+    "en": "Tuna and onions"
+  },
+  "ingredients": {
+    "it": [
+      "Passata di pomodoro",
+      "Mozzarella fiordilatte",
+      "Tonno",
+      "Cipolla di tropea"
+    ],
+    "en": [
+      "Tomato sauce",
+      "Mozzarella fiordilatte",
+      "Tuna",
+      "Tropea onion"
+    ]
+  },
+  "price": 7,
+  "imageUrl": "/images/products/tuna_and_onions.png"
+},
+{
+  "_id": {
+    "$oid": "655de567267893345345b948"
+  },
+  "name": {
+    "it": "Marinara",
+    "en": "Marinara"
+  },
+  "ingredients": {
+    "it": [
+      "Passata di pomodoro",
+      "Olio",
+      "Aglio",
+      "Origano"
+    ],
+    "en": [
+      "Tomato sauce",
+      "Oil",
+      "Garlic",
+      "Oregano"
+    ]
+  },
+  "price": 5,
+  "imageUrl": "/images/products/marinara.png"
+},
+{
+  "_id": {
+    "$oid": "655de570267893345345b949"
+  },
+  "name": {
+    "it": "Gorgonzola e salame",
+    "en": "Gorgonzola and salami"
+  },
+  "ingredients": {
+    "it": [
+      "Passata di pomodoro",
+      "Mozzarella fiordilatte",
+      "Gorgonzola piccante",
+      "Salame napoli"
+    ],
+    "en": [
+      "Tomato sauce",
+      "Mozzarella fiordilatte",
+      "Spicy gorgonzola",
+      "Napoli salami"
+    ]
+  },
+  "price": 7,
+  "imageUrl": "/images/products/gorgonzola_and_salami.png"
+},
+{
+  "_id": {
+    "$oid": "655de575267893345345b94a"
+  },
+  "name": {
+    "it": "Vegetariana",
+    "en": "Vegetarian"
+  },
+  "ingredients": {
+    "it": [
+      "Passata di pomodoro",
+      "Mozzarella fiordilatte",
+      "Zucchine",
+      "Melanzane",
+      "Peperone rosso"
+    ],
+    "en": [
+      "Tomato sauce",
+      "Mozzarella fiordilatte",
+      "Zucchini",
+      "Eggplant",
+      "Red pepper"
+    ]
+  },
+  "price": 7,
+  "imageUrl": "/images/products/vegetarian.png"
+},
+{
+  "_id": {
+    "$oid": "655de579267893345345b94b"
+  },
+  "name": {
+    "it": "Quattro formaggi",
+    "en": "Four cheeses"
+  },
+  "ingredients": {
+    "it": [
+      "Mozzarella fiordilatte",
+      "Groviera",
+      "Gorgonzola",
+      "Grana",
+      "Taleggio"
+    ],
+    "en": [
+      "Mozzarella fiordilatte",
+      "GruyÃ¨re",
+      "Gorgonzola",
+      "Parmesan",
+      "Taleggio"
+    ]
+  },
+  "price": 7,
+  "imageUrl": "/images/products/four_cheeses.png"
+},
+{
+  "_id": {
+    "$oid": "655de57e267893345345b95a"
+  },
+  "name": {
+    "it": "Salmone",
+    "en": "Salmon"
+  },
+  "ingredients": {
+    "it": [
+      "Mozzarella fiordilatte",
+      "Salmone affumicato",
+      "Panna"
+    ],
+    "en": [
+      "Mozzarella fiordilatte",
+      "Smoked salmon",
+      "Cream"
+    ]
+  },
+  "price": 10,
+  "imageUrl": "/images/products/salmon.png"
+},
+{
+  "_id": {
+    "$oid": "655de57e267893345345b95b"
+  },
+  "name": {
+    "it": "Speck e brie",
+    "en": "Speck and brie"
+  },
+  "ingredients": {
+    "it": [
+      "Mozzarella fiordilatte",
+      "Speck",
+      "Brie"
+    ],
+    "en": [
+      "Mozzarella fiordilatte",
+      "Speck",
+      "Brie cheese"
+    ]
+  },
+  "price": 9,
+  "imageUrl": "/images/products/speck_and_brie.png"
+},
+{
+  "_id": {
+    "$oid": "655de57e267893345345b95c"
+  },
+  "name": {
+    "it": "Pere e gorgonzola",
+    "en": "Pears and gorgonzola"
+  },
+  "ingredients": {
+    "it": [
+      "Mozzarella fiordilatte",
+      "Pere",
+      "Gorgonzola"
+    ],
+    "en": [
+      "Mozzarella fiordilatte",
+      "Pears",
+      "Gorgonzola cheese"
+    ]
+  },
+  "price": 9,
+  "imageUrl": "/images/products/pears_and_gorgonzola.png"
+},
+{
+  "_id": {
+    "$oid": "655de57e267893345345b95d"
+  },
+  "name": {
+    "it": "Pancetta e patate",
+    "en": "Bacon and potatoes"
+  },
+  "ingredients": {
+    "it": [
+      "Mozzarella fiordilatte",
+      "Pancetta",
+      "Patate"
+    ],
+    "en": [
+      "Mozzarella fiordilatte",
+      "Bacon",
+      "Potatoes"
+    ]
+  },
+  "price": 7,
+  "imageUrl": "/images/products/bacon_and_potatoes.png"
+},
+{
+  "_id": {
+    "$oid": "655de57e267893345345b95e"
+  },
+  "name": {
+    "it": "Salsiccia e radicchio",
+    "en": "Sausage and radicchio"
+  },
+  "ingredients": {
+    "it": [
+      "Mozzarella fiordilatte",
+      "Salsiccia",
+      "Radicchio"
+    ],
+    "en": [
+      "Mozzarella fiordilatte",
+      "Sausage",
+      "Radicchio"
+    ]
+  },
+  "price": 8,
+  "imageUrl": "/images/products/sausage_and_radicchio.png"
+},
+{
+  "_id": {
+    "$oid": "655de57e267893345345b952"
+  },
+  "name": {
+    "it": "Salsiccia e friarielli",
+    "en": "Sausage and friarielli"
+  },
+  "ingredients": {
+    "it": [
+      "Passata di pomodoro",
+      "Mozzarella fiordilatte",
+      "Salsiccia",
+      "Friarielli"
+    ],
+    "en": [
+      "Tomato sauce",
+      "Mozzarella fiordilatte",
+      "Sausage",
+      "Friarielli"
+    ]
+  },
+  "price": 7,
+  "imageUrl": "/images/products/sausage_and_friarielli.png"
+},
+{
+  "_id": {
+    "$oid": "655de57e267893345345b953"
+  },
+  "name": {
+    "it": "Pesto",
+    "en": "Pesto"
+  },
+  "ingredients": {
+    "it": [
+      "Mozzarella fiordilatte",
+      "Pesto",
+      "Pomodorini",
+      "Parmigiano Reggiano"
+    ],
+    "en": [
+      "Mozzarella fiordilatte",
+      "Pesto",
+      "Cherry tomatoes",
+      "Parmesan cheese"
+    ]
+  },
+  "price": 8,
+  "imageUrl": "/images/products/pesto.png"
+},
+{
+  "_id": {
+    "$oid": "655de57e267893345345b954"
+  },
+  "name": {
+    "it": "Carbonara",
+    "en": "Carbonara"
+  },
+  "ingredients": {
+    "it": [
+      "Mozzarella fiordilatte",
+      "Pancetta",
+      "Uova",
+      "Pepe nero",
+      "Pecorino Romano"
+    ],
+    "en": [
+      "Mozzarella fiordilatte",
+      "Bacon",
+      "Eggs",
+      "Black pepper",
+      "Pecorino Romano cheese"
+    ]
+  },
+  "price": 7,
+  "imageUrl": "/images/products/carbonara.png"
+},
+{
+  "_id": {
+    "$oid": "655de57e267893345345b955"
+  },
+  "name": {
+    "it": "Amatriciana",
+    "en": "Amatriciana"
+  },
+  "ingredients": {
+    "it": [
+      "Passata di pomodoro",
+      "Mozzarella fiordilatte",
+      "Guanciale",
+      "Pepe nero",
+      "Pecorino Romano"
+    ],
+    "en": [
+      "Tomato sauce",
+      "Mozzarella fiordilatte",
+      "Guanciale",
+      "Black pepper",
+      "Pecorino Romano cheese"
+    ]
+  },
+  "price": 7,
+  "imageUrl": "/images/products/amatriciana.png"
+},
+{
+  "_id": {
+    "$oid": "655de57e267893345345b956"
+  },
+  "name": {
+    "it": "Cacio e pepe",
+    "en": "Cheese and pepper"
+  },
+  "ingredients": {
+    "it": [
+      "Mozzarella fiordilatte",
+      "Pecorino Romano",
+      "Pepe nero"
+    ],
+    "en": [
+      "Mozzarella fiordilatte",
+      "Pecorino Romano cheese",
+      "Black pepper"
+    ]
+  },
+  "price": 7,
+  "imageUrl": "/images/products/cheese_and_pepper.png"
+},
+{
+  "_id": {
+    "$oid": "655de57e267893345345b957"
+  },
+  "name": {
+    "it": "Gricia",
+    "en": "Gricia"
+  },
+  "ingredients": {
+    "it": [
+      "Mozzarella fiordilatte",
+      "Guanciale",
+      "Pepe nero",
+      "Pecorino Romano"
+    ],
+    "en": [
+      "Mozzarella fiordilatte",
+      "Guanciale",
+      "Black pepper",
+      "Pecorino Romano cheese"
+    ]
+  },
+  "price": 7,
+  "imageUrl": "/images/products/gricia.png"
+},
+{
+  "_id": {
+    "$oid": "655de57e267893345345b958"
+  },
+  "name": {
+    "it": "Boscaiola",
+    "en": "Woodman"
+  },
+  "ingredients": {
+    "it": [
+      "Passata di pomodoro",
+      "Mozzarella fiordilatte",
+      "Funghi",
+      "Salsiccia"
+    ],
+    "en": [
+      "Tomato sauce",
+      "Mozzarella fiordilatte",
+      "Mushrooms",
+      "Sausage"
+    ]
+  },
+  "price": 7,
+  "imageUrl": "/images/products/woodman.png"
+},
+{
+  "_id": {
+    "$oid": "655de57e267893345345b94c"
+  },
+  "name": {
+    "it": "Bufala",
+    "en": "Buffalo"
+  },
+  "ingredients": {
+    "it": [
+      "Passata di pomodoro",
+      "Mozzarella di bufala",
+      "Basilico"
+    ],
+    "en": [
+      "Tomato sauce",
+      "Buffalo mozzarella",
+      "Basil"
+    ]
+  },
+  "price": 8,
+  "imageUrl": "/images/products/buffalo.png"
+},
+{
+  "_id": {
+    "$oid": "655de57e267893345345b95f"
+  },
+  "name": {
+    "it": "Pomodorini e rucola",
+    "en": "Cherry tomatoes and arugula"
+  },
+  "ingredients": {
+    "it": [
+      "Mozzarella fiordilatte",
+      "Pomodorini",
+      "Rucola"
+    ],
+    "en": [
+      "Mozzarella fiordilatte",
+      "Cherry tomatoes",
+      "Arugula"
+    ]
+  },
+  "price": 7,
+  "imageUrl": "/images/products/cherry_tomatoes_and_arugula.png"
+},
+{
+  "_id": {
+    "$oid": "655de57e267893345345b962"
+  },
+  "name": {
+    "it": "Pomodorini e bufala",
+    "en": "Cherry tomatoes and buffalo"
+  },
+  "ingredients": {
+    "it": [
+      "Mozzarella di bufala",
+      "Pomodorini"
+    ],
+    "en": [
+      "Buffalo mozzarella",
+      "Cherry tomatoes"
+    ]
+  },
+  "price": 9,
+  "imageUrl": "/images/products/cherry_tomatoes_and_buffalo.png"
+}]
