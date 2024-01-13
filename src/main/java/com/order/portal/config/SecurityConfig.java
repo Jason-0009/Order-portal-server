@@ -2,7 +2,6 @@ package com.order.portal.config;
 
 import org.springframework.beans.factory.annotation.Value;
 
-import org.springframework.boot.web.servlet.server.CookieSameSiteSupplier;
 import org.springframework.context.annotation.*;
 
 import org.springframework.security.config.Customizer;
@@ -17,6 +16,8 @@ import org.springframework.security.web.csrf.*;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import org.springframework.web.cors.*;
+
+import java.net.URI;
 
 import lombok.RequiredArgsConstructor;
 
@@ -33,10 +34,18 @@ public class SecurityConfig {
 
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        URI clientUri = new URI(clientUrl);
+        String domain = clientUri.getHost().startsWith("www.") ?
+                clientUri.getHost().substring(4) : clientUri.getHost();
+
+        CookieCsrfTokenRepository csrfTokenRepository = CookieCsrfTokenRepository.withHttpOnlyFalse();
+
+        csrfTokenRepository.setCookieDomain(domain);
+
         http
                 .cors(Customizer.withDefaults())
                 .csrf(csrf -> csrf
-                        .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+                        .csrfTokenRepository(csrfTokenRepository)
                         .csrfTokenRequestHandler(new CsrfTokenRequestAttributeHandler()))
                 .addFilterAfter(new CookieCsrfFilter(), BasicAuthenticationFilter.class)
                 .authorizeHttpRequests(requests -> requests
