@@ -11,8 +11,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.RequiredArgsConstructor;
 
-import org.springframework.data.domain.Sort;
-
 import org.springframework.stereotype.Service;
 
 import com.order.portal.models.Notification;
@@ -31,10 +29,8 @@ public class NotificationService {
 
     private final ObjectMapper objectMapper = new ObjectMapper().findAndRegisterModules();
 
-    public List<Notification> retrieveNotifications() {
-        Sort sortByDateAsc = Sort.by(Sort.Direction.DESC, "date");
-
-        return this.notificationRepository.findAll(sortByDateAsc);
+    public List<Notification> retrieveNotifications(String userId) {
+        return this.notificationRepository.findByUserIdOrderByDateAsc(userId);
     }
 
     public void markNotificationAsRead(String notificationId) {
@@ -45,7 +41,7 @@ public class NotificationService {
         notificationRepository.save(notification);
     }
 
-    public void clearUserNotifications(String userId) {
+    public void clearNotifications(String userId) {
         this.notificationRepository.deleteByUserId(userId);
     }
 
