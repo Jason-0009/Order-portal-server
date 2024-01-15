@@ -49,4 +49,12 @@ public abstract class BaseHandler extends AbstractWebSocketHandler {
 
         session.sendMessage(new TextMessage(message));
     }
+
+    public void broadcastMessage(String message) throws IOException {
+        for (WebSocketSession session : sessions.values()) {
+            if (!session.isOpen()) continue;
+
+            session.sendMessage(new TextMessage(message));
+        }
+    }
 }

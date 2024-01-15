@@ -19,8 +19,6 @@ import org.springframework.data.util.Pair;
 
 import org.springframework.http.HttpStatus;
 
-import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
-
 import org.springframework.web.server.ResponseStatusException;
 
 import org.springframework.stereotype.Service;
@@ -121,16 +119,18 @@ public class OrderService {
         return statistics;
     }
 
-    public void submitNewOrderForUser(Authentication authentication, Order order) throws AccessDeniedException {
+    public void submitNewOrderForUser(Authentication authentication, Order order) throws AccessDeniedException, IOException {
         OAuthAccount oauthAccount = this.authService.retrieveAuthenticatedOAuthAccount(authentication);
 
         order.setCustomerId(oauthAccount.getUserId());
         order.setDate(Instant.now());
 
         this.orderRepository.save(order);
+
+        this.sendUpdates(order);
     }
 
-    public void updateOrderStatus(Authentication authentication, String orderId, OrderStatus status) throws IOException {
+    public void updateOrderStatus(String orderId, OrderStatus status) throws IOException {
         boolean orderInChargeExists = this.orderRepository.existsByStatus(OrderStatus.IN_CHARGE);
 
         if (status == OrderStatus.IN_CHARGE && orderInChargeExists)
@@ -141,12 +141,7 @@ public class OrderService {
 
         this.orderRepository.save(order);
 
-        if (!(authentication instanceof OAuth2AuthenticationToken token)) return;
-
-        String adminId = token.getPrincipal().getAttribute("sub");
-
-        this.sendUpdatedOrder(adminId, order);
-        this.sendUpdatedStatistics(adminId);
+        this.sendUpdates(order);
 
         OAuthAccount customerAccount = this.authService.retrieveOAuthAccountByUserId(order.getCustomerId());
 
@@ -222,17 +217,22 @@ public class OrderService {
         return this.orderRepository.countByStatus(OrderStatus.DELIVERING);
     }
 
-    private void sendUpdatedOrder(String oauthUserId, Order order) throws IOException {
-        String orderJson = this.objectMapper.writeValueAsString(order);
-
-        orderHandler.sendMessage(oauthUserId, orderJson);
+    private void sendUpdates(Order order) throws IOException {
+        sendUpdatedOrder(order);
+        sendUpdatedStatistics();
     }
 
-    private void sendUpdatedStatistics(String recipientId) throws IOException {
+    private void sendUpdatedOrder(Order order) throws IOException {
+        String orderJson = this.objectMapper.writeValueAsString(order);
+
+        orderHandler.broadcastMessage(orderJson);
+    }
+
+    private void sendUpdatedStatistics() throws IOException {
         Map<String, Long> statistics = this.retrieveStatistics();
 
         String statisticsJson = this.objectMapper.writeValueAsString(statistics);
 
-        statisticsHandler.sendMessage(recipientId, statisticsJson);
+        statisticsHandler.broadcastMessage(statisticsJson);
     }
 }

@@ -53,14 +53,13 @@ public class OrderController {
     }
 
     @PostMapping
-    public void submitNewOrderForUser(Authentication authentication, @RequestBody Order order) {
+    public void submitNewOrderForUser(Authentication authentication, @RequestBody Order order) throws IOException {
         this.orderService.submitNewOrderForUser(authentication, order);
     }
 
     @PutMapping("/{orderId}")
-    public void updateOrderStatus(Authentication authentication,
-                                  @PathVariable String orderId,
+    public void updateOrderStatus(@PathVariable String orderId,
                                   @RequestBody OrderStatus status) throws IOException {
-        this.orderService.updateOrderStatus(authentication, orderId, status);
+        this.orderService.updateOrderStatus(orderId, status);
     }
 }
