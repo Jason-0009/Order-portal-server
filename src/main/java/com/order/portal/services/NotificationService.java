@@ -30,7 +30,7 @@ public class NotificationService {
     private final ObjectMapper objectMapper = new ObjectMapper().findAndRegisterModules();
 
     public List<Notification> retrieveNotifications(String userId) {
-        return this.notificationRepository.findByUserIdOrderByDateAsc(userId);
+        return this.notificationRepository.findByUserIdOrderByDateDesc(userId);
     }
 
     public void markNotificationAsRead(String notificationId) {
