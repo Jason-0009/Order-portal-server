@@ -12,27 +12,27 @@ It provides a range of server-side features including real-time updates, user ma
 The server uses WebSocket technology to provide real-time updates to the client. 
 This ensures that users are always informed about the status of their orders.
 
-### User Management
+### User management
 
 The server includes a user management system that allows ranking of users. 
 This can be used to prioritize orders, offer rewards, or implement any other ranking-based features.
 
-### Order Management
+### Order management
 
 The server provides endpoints for creating and managing orders. 
 It handles requests from the client to create orders with ingredients of the user's choice and manage these orders effectively.
 
-### Google Authentication
+### Google authentication
 
 The server supports authentication using Google accounts. 
 This provides a secure and convenient way for users to access the platform.
 
-### MongoDB Integration
+### MongoDB integration
 
 The server uses MongoDB as its database. 
 This allows for efficient storage and retrieval of data, ensuring high performance even with large amounts of data.
 
-## Installation and Setup
+## Installation and setup
 
 1. **Clone the repository**
 
