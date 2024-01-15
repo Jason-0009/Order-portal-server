@@ -7,7 +7,7 @@ It provides a range of server-side features including real-time updates, user ma
 
 ## Features
 
-### Real-Time updates
+### Real-time updates
 
 The server uses WebSocket technology to provide real-time updates to the client. 
 This ensures that users are always informed about the status of their orders.
