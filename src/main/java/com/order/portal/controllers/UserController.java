@@ -41,10 +41,9 @@ public class UserController {
     }
     
     @PutMapping("/{userId}/role")
-    public void updateUserRole(Authentication authentication,
-                               @PathVariable String userId,
+    public void updateUserRole(@PathVariable String userId,
                                @RequestBody UserRole role) throws IOException {
-        this.userService.updateUserRole(authentication, userId, role);
+        this.userService.updateUserRole(userId, role);
     }
 
     @PutMapping("/{userId}/preferredLanguage")

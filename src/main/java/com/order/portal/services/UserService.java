@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import org.springframework.data.domain.*;
 
-import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.Authentication;
 
@@ -56,17 +55,13 @@ public class UserService {
         return this.retrieveUserById(oauthAccount.getUserId());
     }
 
-    public void updateUserRole(Authentication authentication, String userId, UserRole role) throws IOException {
+    public void updateUserRole(String userId, UserRole role) throws IOException {
         User user = this.retrieveUserById(userId);
         user.setRole(role);
 
         this.userRepository.save(user);
 
-        if (!(authentication instanceof OAuth2AuthenticationToken token)) return;
-
-        String adminId = token.getPrincipal().getAttribute("sub");
-
-        this.sendUpdatedUser(adminId, user);
+        this.sendUpdatedUser(user);
 
         OAuthAccount userAccount = this.authService.retrieveOAuthAccountByUserId(userId);
 
@@ -93,9 +88,9 @@ public class UserService {
                 .orElseThrow(() -> new NoSuchElementException("User not found."));
     }
 
-    private void sendUpdatedUser(String recipientId, User user) throws IOException {
+    private void sendUpdatedUser(User user) throws IOException {
         String userJson = this.objectMapper.writeValueAsString(user);
 
-        userHandler.sendMessage(recipientId, userJson);
+        userHandler.broadcastMessage(userJson);
     }
 }
