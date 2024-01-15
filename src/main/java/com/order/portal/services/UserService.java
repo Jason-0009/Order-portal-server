@@ -41,10 +41,13 @@ public class UserService {
 
         String authenticatedUserId = oauthAccount.getUserId();
 
-        if (searchTerm == null || searchTerm.isEmpty())
-            return this.userRepository.findByIdNot(pageable, authenticatedUserId);
+        Sort sort = Sort.by(Sort.Direction.ASC, "role");
+        Pageable sortedPageable = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), sort);
 
-        return this.userRepository.findByNameContainingIgnoreCaseAndIdNot(pageable, searchTerm, authenticatedUserId);
+        if (searchTerm == null || searchTerm.isEmpty())
+            return this.userRepository.findByIdNot(sortedPageable, authenticatedUserId);
+
+        return this.userRepository.findByNameContainingIgnoreCaseAndIdNot(sortedPageable, searchTerm, authenticatedUserId);
     }
 
     public User retrieveAuthenticatedUserProfile(Authentication authentication) throws AccessDeniedException {
@@ -73,7 +76,7 @@ public class UserService {
         String redirectUrl = null;
 
         if (user.getRole() == UserRole.ADMIN)
-            redirectUrl = "/users";
+            redirectUrl = "/admin/users";
 
         notificationService.saveNotification(userAccount, messageCode, redirectUrl);
     }
