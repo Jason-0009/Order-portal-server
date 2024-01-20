@@ -36,7 +36,7 @@ This allows for efficient storage and retrieval of data, ensuring high performan
 
 1. **Clone the repository**
 
-    First, you need to clone the Order Portal Server repository to your local machine. You can do this using the following command:
+    First, you need to clone the repository to your local machine. You can do this using the following command:
 
     ```bash
     git clone <repository-url>
