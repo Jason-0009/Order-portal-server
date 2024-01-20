@@ -36,7 +36,7 @@ The server uses MongoDB as its database. This allows for efficient storage and r
     git clone <repository-url>
     ```
 
-    Replace `<repository-url>` with the URL of your Order Portal Server repository.
+    Replace `<repository-url>` with the URL of the repository.
 
 2. **Install dependencies**
 
