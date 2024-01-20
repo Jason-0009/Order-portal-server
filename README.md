@@ -2,7 +2,7 @@
 
 ## Overview
 
-This portal server is a robust backend service built with Spring Boot and MongoDB. It provides a range of server-side features including real-time updates, user management, and order management.
+This server is a robust backend service built with Spring Boot and MongoDB. It provides a range of server-side features including real-time updates, user management, and order management.
 
 ## Features
 
