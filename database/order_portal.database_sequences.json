@@ -1,0 +1,12 @@
+[{
+  "_id": "users_sequence",
+  "value": 16
+},
+{
+  "_id": "orders_sequence",
+  "value": 4
+},
+{
+  "_id": "notifications_sequence",
+  "value": 19
+}]
