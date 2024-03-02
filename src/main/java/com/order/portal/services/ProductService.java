@@ -21,7 +21,7 @@ public class ProductService {
         return this.productRepository.findAll(pageable);
     }
 
-    public Page<Product> retrieveProductsByIds(List<String> ids, Pageable pageable) {
+    public Page<Product> retrieveProductsByIds(List<Long> ids, Pageable pageable) {
         return this.productRepository.findByIdIn(ids, pageable);
     }
 }

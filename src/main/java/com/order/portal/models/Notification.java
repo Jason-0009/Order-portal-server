@@ -12,7 +12,7 @@ import java.time.Instant;
 public class Notification {
     @Id
     private String id;
-    private String userId;
+    private Long userId;
     private String messageCode;
     private Instant date;
     private boolean readStatus;

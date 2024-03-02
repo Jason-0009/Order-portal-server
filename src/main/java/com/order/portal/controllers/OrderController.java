@@ -43,7 +43,7 @@ public class OrderController {
     }
 
     @GetMapping("/{orderId}")
-    public Order retrieveOrderById(@PathVariable String orderId) {
+    public Order retrieveOrderById(@PathVariable Long orderId) {
         return this.orderService.retrieveOrderById(orderId);
     }
 
@@ -58,7 +58,7 @@ public class OrderController {
     }
 
     @PutMapping("/{orderId}")
-    public void updateOrderStatus(@PathVariable String orderId,
+    public void updateOrderStatus(@PathVariable Long orderId,
                                   @RequestBody OrderStatus status) throws IOException {
         this.orderService.updateOrderStatus(orderId, status);
     }

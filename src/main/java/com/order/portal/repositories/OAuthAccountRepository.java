@@ -8,5 +8,5 @@ import com.order.portal.models.OAuthAccount;
 
 public interface OAuthAccountRepository extends MongoRepository<OAuthAccount, String> {
     Optional<OAuthAccount> findByOauthUserId(String oauthUserId);
-    Optional<OAuthAccount> findByUserId(String oauthUserId);
+    Optional<OAuthAccount> findByUserId(Long userId);
 }

@@ -1,16 +1,15 @@
 package com.order.portal.models;
 
+import lombok.Data;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import lombok.Data;
-
+@Document(collection = "database_sequences")
 @Data
-@Document(collection = "oauth_accounts")
-public class OAuthAccount {
+public class DatabaseSequence {
     @Id
     private String id;
-    private String oauthUserId;
-    private String provider;
-    private Long userId;
+
+    private long value;
 }

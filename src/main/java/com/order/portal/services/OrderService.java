@@ -9,9 +9,9 @@ import java.time.ZonedDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import org.springframework.data.domain.*;
-
 import lombok.RequiredArgsConstructor;
+
+import org.springframework.data.domain.*;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -42,6 +42,7 @@ public class OrderService {
 
     private final AuthService authService;
     private final NotificationService notificationService;
+    private final SequenceGeneratorService sequenceGeneratorService;
 
     private final OrderHandler orderHandler;
     private final StatisticsHandler statisticsHandler;
@@ -79,7 +80,7 @@ public class OrderService {
         List<Order> orders;
 
         OAuthAccount oauthAccount = this.authService.retrieveAuthenticatedOAuthAccount(authentication);
-        String customerId = oauthAccount.getUserId();
+        Long customerId = oauthAccount.getUserId();
 
         if (date == null && status == null) {
             orders = this.orderRepository.findByCustomerId(customerId);
@@ -104,7 +105,7 @@ public class OrderService {
         return sortOrders(orders, pageable);
     }
 
-    public Order retrieveOrderById(String id) {
+    public Order retrieveOrderById(Long id) {
         return orderRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Order not found."));
     }
@@ -122,6 +123,7 @@ public class OrderService {
     public void submitNewOrderForUser(Authentication authentication, Order order) throws AccessDeniedException, IOException {
         OAuthAccount oauthAccount = this.authService.retrieveAuthenticatedOAuthAccount(authentication);
 
+        order.setId(sequenceGeneratorService.generateSequence(Order.SEQUENCE_NAME));
         order.setCustomerId(oauthAccount.getUserId());
         order.setDate(Instant.now());
 
@@ -130,7 +132,7 @@ public class OrderService {
         this.sendUpdates(order);
     }
 
-    public void updateOrderStatus(String orderId, OrderStatus status) throws IOException {
+    public void updateOrderStatus(Long orderId, OrderStatus status) throws IOException {
         boolean orderInChargeExists = this.orderRepository.existsByStatus(OrderStatus.IN_CHARGE);
 
         if (status == OrderStatus.IN_CHARGE && orderInChargeExists)

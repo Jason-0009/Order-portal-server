@@ -38,7 +38,7 @@ public class UserService {
     public Page<User> retrieveUsers(Authentication authentication, Pageable pageable, String searchTerm) {
         OAuthAccount oauthAccount = this.authService.retrieveAuthenticatedOAuthAccount(authentication);
 
-        String authenticatedUserId = oauthAccount.getUserId();
+        Long authenticatedUserId = oauthAccount.getUserId();
 
         Sort sort = Sort.by(Sort.Direction.ASC, "role");
         Pageable sortedPageable = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), sort);
@@ -55,7 +55,7 @@ public class UserService {
         return this.retrieveUserById(oauthAccount.getUserId());
     }
 
-    public void updateUserRole(String userId, UserRole role) throws IOException {
+    public void updateUserRole(Long userId, UserRole role) throws IOException {
         User user = this.retrieveUserById(userId);
         user.setRole(role);
 
@@ -76,14 +76,14 @@ public class UserService {
         notificationService.saveNotification(userAccount, messageCode, redirectUrl);
     }
 
-    public void updateUserPreferredLanguage(String userId, String preferredLanguage) {
+    public void updateUserPreferredLanguage(Long userId, String preferredLanguage) {
         User user = this.retrieveUserById(userId);
         user.setPreferredLanguage(preferredLanguage);
 
         this.userRepository.save(user);
     }
 
-    public User retrieveUserById(String id) {
+    public User retrieveUserById(Long id) {
         return this.userRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("User not found."));
     }

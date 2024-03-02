@@ -36,18 +36,18 @@ public class UserController {
     }
 
     @GetMapping("/{userId}")
-    public User retrieveUser(@PathVariable String userId) throws AccessDeniedException {
+    public User retrieveUser(@PathVariable Long userId) throws AccessDeniedException {
         return this.userService.retrieveUserById(userId);
     }
     
     @PutMapping("/{userId}/role")
-    public void updateUserRole(@PathVariable String userId,
+    public void updateUserRole(@PathVariable Long userId,
                                @RequestBody UserRole role) throws IOException {
         this.userService.updateUserRole(userId, role);
     }
 
     @PutMapping("/{userId}/preferredLanguage")
-    public void updateUserPreferredLanguage(@PathVariable String userId,
+    public void updateUserPreferredLanguage(@PathVariable Long userId,
                                             @RequestBody String preferredLanguage) {
         this.userService.updateUserPreferredLanguage(userId, preferredLanguage);
     }

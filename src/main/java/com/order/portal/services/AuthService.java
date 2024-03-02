@@ -40,7 +40,7 @@ public class AuthService {
                 .orElseThrow(() -> new NoSuchElementException("OAuthAccount not found."));
     }
 
-    public OAuthAccount retrieveOAuthAccountByUserId(String userId) throws NoSuchElementException {
+    public OAuthAccount retrieveOAuthAccountByUserId(Long userId) throws NoSuchElementException {
         return this.oauthAccountRepository.findByUserId(userId)
                 .orElseThrow(() -> new NoSuchElementException(String.format("OAuthAccount not found for userId: %s.", userId)));
     }

@@ -2,6 +2,7 @@ package com.order.portal.config.handlers;
 
 import java.io.IOException;
 
+
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.stereotype.Component;
@@ -19,6 +20,8 @@ import com.order.portal.models.OAuthAccount;
 import com.order.portal.models.user.UserRole;
 import com.order.portal.models.user.User;
 
+import com.order.portal.services.SequenceGeneratorService;
+
 import com.order.portal.repositories.OAuthAccountRepository;
 import com.order.portal.repositories.UserRepository;
 
@@ -27,6 +30,8 @@ import com.order.portal.repositories.UserRepository;
 public class OAuth2LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
     private final UserRepository userRepository;
     private final OAuthAccountRepository oauthAccountRepository;
+
+    private final SequenceGeneratorService sequenceGeneratorService;
 
     @Value("${client.url}")
     private String clientUrl;
@@ -50,6 +55,7 @@ public class OAuth2LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHan
                 .orElseGet(() -> {
                     User newUser = new User();
 
+                    newUser.setId(sequenceGeneratorService.generateSequence(User.SEQUENCE_NAME));
                     newUser.setName(name);
                     newUser.setEmail(email);
                     newUser.setImageUrl(imageUrl);

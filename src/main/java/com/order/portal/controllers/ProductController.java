@@ -24,7 +24,7 @@ public class ProductController {
     }
 
     @GetMapping(params = "ids")
-    public Page<Product> retrieveProducts(@RequestParam List<String> ids, Pageable pageable) {
+    public Page<Product> retrieveProducts(@RequestParam List<Long> ids, Pageable pageable) {
         return this.productService.retrieveProductsByIds(ids, pageable);
     }
 }

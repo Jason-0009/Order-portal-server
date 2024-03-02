@@ -11,5 +11,5 @@ import com.order.portal.models.Product;
 
 @Repository
 public interface ProductRepository extends MongoRepository<Product, String> {
-    Page<Product> findByIdIn(List<String> ids, Pageable pageable);
+    Page<Product> findByIdIn(List<Long> ids, Pageable pageable);
 }
