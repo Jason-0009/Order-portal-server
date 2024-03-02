@@ -1,13 +1,137 @@
 [{
   "_id": {
-    "$oid": "659c129dcd8a953fac5438bd"
+    "$oid": "65e31c2111a77255aecdc5fb"
   },
-  "userId": "659181758cc9074708964c24",
-  "messageCode": "orderStatusDelivering",
+  "id": 6,
+  "userId": 3,
+  "messageCode": "orderStatusDelivered",
   "date": {
-    "$date": "2024-01-08T15:19:57.118Z"
+    "$date": "2024-03-02T12:31:29.309Z"
   },
   "readStatus": true,
-  "redirectUrl": "/orders/659b3df4d7860b7f6d58a09b",
+  "redirectUrl": "/orders/2",
+  "_class": "com.order.portal.models.Notification"
+},
+{
+  "_id": {
+    "$oid": "65e37f81f0787b2ddd309bfc"
+  },
+  "id": 7,
+  "userId": 16,
+  "messageCode": "roleUpdatedToAdmin",
+  "date": {
+    "$date": "2024-03-02T19:35:29.083Z"
+  },
+  "readStatus": true,
+  "redirectUrl": "/admin/users",
+  "_class": "com.order.portal.models.Notification"
+},
+{
+  "_id": {
+    "$oid": "65e37ff144560822d319c28a"
+  },
+  "id": 8,
+  "userId": 16,
+  "messageCode": "roleUpdatedToUser",
+  "date": {
+    "$date": "2024-03-02T19:37:21.749Z"
+  },
+  "readStatus": false,
+  "_class": "com.order.portal.models.Notification"
+},
+{
+  "_id": {
+    "$oid": "65e3803d03914369896f0106"
+  },
+  "id": 9,
+  "userId": 16,
+  "messageCode": "roleUpdatedToAdmin",
+  "date": {
+    "$date": "2024-03-02T19:38:37.074Z"
+  },
+  "readStatus": true,
+  "redirectUrl": "/admin/users",
+  "_class": "com.order.portal.models.Notification"
+},
+{
+  "_id": {
+    "$oid": "65e3811157cfc64a356fe5b0"
+  },
+  "id": 10,
+  "userId": 16,
+  "messageCode": "roleUpdatedToUser",
+  "date": {
+    "$date": "2024-03-02T19:42:09.510Z"
+  },
+  "readStatus": true,
+  "_class": "com.order.portal.models.Notification"
+},
+{
+  "_id": {
+    "$oid": "65e3a03536b5e01e7314017b"
+  },
+  "id": 15,
+  "userId": 15,
+  "messageCode": "roleUpdatedToUser",
+  "date": {
+    "$date": "2024-03-02T21:55:01.746Z"
+  },
+  "readStatus": true,
+  "_class": "com.order.portal.models.Notification"
+},
+{
+  "_id": {
+    "$oid": "65e3a05d36b5e01e7314017c"
+  },
+  "id": 16,
+  "userId": 15,
+  "messageCode": "roleUpdatedToAdmin",
+  "date": {
+    "$date": "2024-03-02T21:55:41.304Z"
+  },
+  "readStatus": true,
+  "redirectUrl": "/admin/users",
+  "_class": "com.order.portal.models.Notification"
+},
+{
+  "_id": {
+    "$oid": "65e3a0b336b5e01e7314017e"
+  },
+  "id": 17,
+  "userId": 16,
+  "messageCode": "orderStatusInCharge",
+  "date": {
+    "$date": "2024-03-02T21:57:07.720Z"
+  },
+  "readStatus": true,
+  "redirectUrl": "/orders/4",
+  "_class": "com.order.portal.models.Notification"
+},
+{
+  "_id": {
+    "$oid": "65e3a0b736b5e01e7314017f"
+  },
+  "id": 18,
+  "userId": 16,
+  "messageCode": "orderStatusDelivering",
+  "date": {
+    "$date": "2024-03-02T21:57:11.415Z"
+  },
+  "readStatus": true,
+  "redirectUrl": "/orders/4",
+  "_class": "com.order.portal.models.Notification"
+},
+{
+  "_id": {
+    "$oid": "65e3a0d636b5e01e73140180"
+  },
+  "id": 19,
+  "userId": 16,
+  "messageCode": "orderStatusDelivered",
+  "date": {
+    "$date": "2024-03-02T21:57:42.336Z"
+  },
+  "readStatus": false,
+  "redirectUrl": "/orders/4",
   "_class": "com.order.portal.models.Notification"
 }]

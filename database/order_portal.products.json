@@ -19,7 +19,8 @@
     ]
   },
   "price": 5,
-  "imageUrl": "/images/products/margherita.png"
+  "imageUrl": "/images/products/margherita.png",
+  "id": 1
 },
 {
   "_id": {
@@ -42,7 +43,8 @@
     ]
   },
   "price": 6,
-  "imageUrl": "/images/products/spicy.png"
+  "imageUrl": "/images/products/spicy.png",
+  "id": 2
 },
 {
   "_id": {
@@ -71,7 +73,8 @@
     ]
   },
   "price": 7,
-  "imageUrl": "/images/products/capricious.png"
+  "imageUrl": "/images/products/capricious.png",
+  "id": 3
 },
 {
   "_id": {
@@ -98,7 +101,8 @@
     ]
   },
   "price": 7,
-  "imageUrl": "/images/products/neapolitan.png"
+  "imageUrl": "/images/products/neapolitan.png",
+  "id": 4
 },
 {
   "_id": {
@@ -123,7 +127,8 @@
     ]
   },
   "price": 10,
-  "imageUrl": "/images/products/seafood.png"
+  "imageUrl": "/images/products/seafood.png",
+  "id": 5
 },
 {
   "_id": {
@@ -152,7 +157,8 @@
     ]
   },
   "price": 7,
-  "imageUrl": "/images/products/four_seasons.png"
+  "imageUrl": "/images/products/four_seasons.png",
+  "id": 6
 },
 {
   "_id": {
@@ -177,7 +183,8 @@
     ]
   },
   "price": 6,
-  "imageUrl": "/images/products/ham_and_mushrooms.png"
+  "imageUrl": "/images/products/ham_and_mushrooms.png",
+  "id": 7
 },
 {
   "_id": {
@@ -198,7 +205,8 @@
     ]
   },
   "price": 6,
-  "imageUrl": "/images/products/raw_ham.png"
+  "imageUrl": "/images/products/raw_ham.png",
+  "id": 8
 },
 {
   "_id": {
@@ -221,7 +229,8 @@
     ]
   },
   "price": 7,
-  "imageUrl": "/images/products/ham_and_melon.png"
+  "imageUrl": "/images/products/ham_and_melon.png",
+  "id": 9
 },
 {
   "_id": {
@@ -246,7 +255,8 @@
     ]
   },
   "price": 7,
-  "imageUrl": "/images/products/tuna_and_onions.png"
+  "imageUrl": "/images/products/tuna_and_onions.png",
+  "id": 10
 },
 {
   "_id": {
@@ -271,7 +281,8 @@
     ]
   },
   "price": 5,
-  "imageUrl": "/images/products/marinara.png"
+  "imageUrl": "/images/products/marinara.png",
+  "id": 11
 },
 {
   "_id": {
@@ -296,7 +307,8 @@
     ]
   },
   "price": 7,
-  "imageUrl": "/images/products/gorgonzola_and_salami.png"
+  "imageUrl": "/images/products/gorgonzola_and_salami.png",
+  "id": 12
 },
 {
   "_id": {
@@ -323,7 +335,8 @@
     ]
   },
   "price": 7,
-  "imageUrl": "/images/products/vegetarian.png"
+  "imageUrl": "/images/products/vegetarian.png",
+  "id": 13
 },
 {
   "_id": {
@@ -350,7 +363,8 @@
     ]
   },
   "price": 7,
-  "imageUrl": "/images/products/four_cheeses.png"
+  "imageUrl": "/images/products/four_cheeses.png",
+  "id": 14
 },
 {
   "_id": {
@@ -373,7 +387,8 @@
     ]
   },
   "price": 10,
-  "imageUrl": "/images/products/salmon.png"
+  "imageUrl": "/images/products/salmon.png",
+  "id": 15
 },
 {
   "_id": {
@@ -396,7 +411,8 @@
     ]
   },
   "price": 9,
-  "imageUrl": "/images/products/speck_and_brie.png"
+  "imageUrl": "/images/products/speck_and_brie.png",
+  "id": 16
 },
 {
   "_id": {
@@ -419,7 +435,8 @@
     ]
   },
   "price": 9,
-  "imageUrl": "/images/products/pears_and_gorgonzola.png"
+  "imageUrl": "/images/products/pears_and_gorgonzola.png",
+  "id": 17
 },
 {
   "_id": {
@@ -442,7 +459,8 @@
     ]
   },
   "price": 7,
-  "imageUrl": "/images/products/bacon_and_potatoes.png"
+  "imageUrl": "/images/products/bacon_and_potatoes.png",
+  "id": 18
 },
 {
   "_id": {
@@ -465,7 +483,8 @@
     ]
   },
   "price": 8,
-  "imageUrl": "/images/products/sausage_and_radicchio.png"
+  "imageUrl": "/images/products/sausage_and_radicchio.png",
+  "id": 19
 },
 {
   "_id": {
@@ -490,7 +509,8 @@
     ]
   },
   "price": 7,
-  "imageUrl": "/images/products/sausage_and_friarielli.png"
+  "imageUrl": "/images/products/sausage_and_friarielli.png",
+  "id": 20
 },
 {
   "_id": {
@@ -515,7 +535,8 @@
     ]
   },
   "price": 8,
-  "imageUrl": "/images/products/pesto.png"
+  "imageUrl": "/images/products/pesto.png",
+  "id": 21
 },
 {
   "_id": {
@@ -542,7 +563,8 @@
     ]
   },
   "price": 7,
-  "imageUrl": "/images/products/carbonara.png"
+  "imageUrl": "/images/products/carbonara.png",
+  "id": 22
 },
 {
   "_id": {
@@ -569,7 +591,8 @@
     ]
   },
   "price": 7,
-  "imageUrl": "/images/products/amatriciana.png"
+  "imageUrl": "/images/products/amatriciana.png",
+  "id": 23
 },
 {
   "_id": {
@@ -592,7 +615,8 @@
     ]
   },
   "price": 7,
-  "imageUrl": "/images/products/cheese_and_pepper.png"
+  "imageUrl": "/images/products/cheese_and_pepper.png",
+  "id": 24
 },
 {
   "_id": {
@@ -617,7 +641,8 @@
     ]
   },
   "price": 7,
-  "imageUrl": "/images/products/gricia.png"
+  "imageUrl": "/images/products/gricia.png",
+  "id": 25
 },
 {
   "_id": {
@@ -642,7 +667,8 @@
     ]
   },
   "price": 7,
-  "imageUrl": "/images/products/woodman.png"
+  "imageUrl": "/images/products/woodman.png",
+  "id": 26
 },
 {
   "_id": {
@@ -665,7 +691,8 @@
     ]
   },
   "price": 8,
-  "imageUrl": "/images/products/buffalo.png"
+  "imageUrl": "/images/products/buffalo.png",
+  "id": 27
 },
 {
   "_id": {
@@ -688,7 +715,8 @@
     ]
   },
   "price": 7,
-  "imageUrl": "/images/products/cherry_tomatoes_and_arugula.png"
+  "imageUrl": "/images/products/cherry_tomatoes_and_arugula.png",
+  "id": 28
 },
 {
   "_id": {
@@ -709,5 +737,6 @@
     ]
   },
   "price": 9,
-  "imageUrl": "/images/products/cherry_tomatoes_and_buffalo.png"
+  "imageUrl": "/images/products/cherry_tomatoes_and_buffalo.png",
+  "id": 29
 }]
