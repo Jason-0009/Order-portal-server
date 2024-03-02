@@ -18,10 +18,10 @@ public class ProductService {
     private final ProductRepository productRepository;
 
     public Page<Product> retrieveAllProducts(Pageable pageable) {
-        return this.productRepository.findAll(pageable);
+        return productRepository.findAll(pageable);
     }
 
     public Page<Product> retrieveProductsByIds(List<Long> ids, Pageable pageable) {
-        return this.productRepository.findByIdIn(ids, pageable);
+        return productRepository.findByIdIn(ids, pageable);
     }
 }

@@ -1,15 +1,16 @@
 package com.order.portal.repositories;
 
 import java.util.List;
+import java.util.Optional;
 
-import org.springframework.data.mongodb.repository.DeleteQuery;
-import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.mongodb.repository.*;
 
 import com.order.portal.models.Notification;
 
 public interface NotificationRepository extends MongoRepository<Notification, String> {
-    List<Notification> findByUserIdOrderByDateDesc(String userId);
+    Optional<Notification> findById(Long id);
+    List<Notification> findByUserIdOrderByDateDesc(Long userId);
 
     @DeleteQuery
-    void deleteByUserId(String userId);
+    void deleteByUserId(Long userId);
 }

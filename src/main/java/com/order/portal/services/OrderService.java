@@ -53,13 +53,13 @@ public class OrderService {
         List<Order> orders;
 
         if (date == null && status == null) {
-            orders = this.orderRepository.findAll();
+            orders = orderRepository.findAll();
 
             return sortOrders(orders, pageable);
         }
 
         if (date == null) {
-            orders = this.orderRepository.findByStatus(status);
+            orders = orderRepository.findByStatus(status);
 
             return sortOrders(orders, pageable);
         }
@@ -69,8 +69,8 @@ public class OrderService {
         Instant startOfDay = startAndEndOfDay.getFirst();
         Instant endOfDay = startAndEndOfDay.getSecond();
 
-        orders = (status == null) ? this.orderRepository.findByDateBetween(startOfDay, endOfDay)
-                : this.orderRepository.findByDateBetweenAndStatus(startOfDay, endOfDay, status);
+        orders = (status == null) ? orderRepository.findByDateBetween(startOfDay, endOfDay)
+                : orderRepository.findByDateBetweenAndStatus(startOfDay, endOfDay, status);
 
         return sortOrders(orders, pageable);
     }
@@ -79,17 +79,17 @@ public class OrderService {
                                                           Instant date, OrderStatus status) throws AccessDeniedException {
         List<Order> orders;
 
-        OAuthAccount oauthAccount = this.authService.retrieveAuthenticatedOAuthAccount(authentication);
+        OAuthAccount oauthAccount = authService.retrieveAuthenticatedOAuthAccount(authentication);
         Long customerId = oauthAccount.getUserId();
 
         if (date == null && status == null) {
-            orders = this.orderRepository.findByCustomerId(customerId);
+            orders = orderRepository.findByCustomerId(customerId);
 
             return sortOrders(orders, pageable);
         }
 
         if (date == null) {
-            orders = this.orderRepository.findByCustomerIdAndStatus(customerId, status);
+            orders = orderRepository.findByCustomerIdAndStatus(customerId, status);
 
             return sortOrders(orders, pageable);
         }
@@ -99,8 +99,8 @@ public class OrderService {
         Instant startOfDay = startAndEndOfDay.getFirst();
         Instant endOfDay = startAndEndOfDay.getSecond();
 
-        orders = status == null ? this.orderRepository.findByCustomerIdAndDateBetween(customerId, startOfDay, endOfDay)
-                : this.orderRepository.findByCustomerIdAndDateBetweenAndStatus(customerId, startOfDay, endOfDay, status);
+        orders = status == null ? orderRepository.findByCustomerIdAndDateBetween(customerId, startOfDay, endOfDay)
+                : orderRepository.findByCustomerIdAndDateBetweenAndStatus(customerId, startOfDay, endOfDay, status);
 
         return sortOrders(orders, pageable);
     }
@@ -121,19 +121,19 @@ public class OrderService {
     }
 
     public void submitNewOrderForUser(Authentication authentication, Order order) throws AccessDeniedException, IOException {
-        OAuthAccount oauthAccount = this.authService.retrieveAuthenticatedOAuthAccount(authentication);
+        OAuthAccount oauthAccount = authService.retrieveAuthenticatedOAuthAccount(authentication);
 
         order.setId(sequenceGeneratorService.generateSequence(Order.SEQUENCE_NAME));
         order.setCustomerId(oauthAccount.getUserId());
         order.setDate(Instant.now());
 
-        this.orderRepository.save(order);
+        orderRepository.save(order);
 
-        this.sendUpdates(order);
+        sendUpdates(order);
     }
 
     public void updateOrderStatus(Long orderId, OrderStatus status) throws IOException {
-        boolean orderInChargeExists = this.orderRepository.existsByStatus(OrderStatus.IN_CHARGE);
+        boolean orderInChargeExists = orderRepository.existsByStatus(OrderStatus.IN_CHARGE);
 
         if (status == OrderStatus.IN_CHARGE && orderInChargeExists)
             throw new ResponseStatusException(HttpStatus.CONFLICT, "orderAlreadyInCharge");
@@ -141,11 +141,11 @@ public class OrderService {
         Order order = retrieveOrderById(orderId);
         order.setStatus(status);
 
-        this.orderRepository.save(order);
+        orderRepository.save(order);
 
-        this.sendUpdates(order);
+        sendUpdates(order);
 
-        OAuthAccount customerAccount = this.authService.retrieveOAuthAccountByUserId(order.getCustomerId());
+        OAuthAccount customerAccount = authService.retrieveOAuthAccountByUserId(order.getCustomerId());
 
         String statusName = status.name().toLowerCase();
         String[] parts = statusName.split("_");
@@ -208,15 +208,15 @@ public class OrderService {
         Instant startOfDay = startAndEndOfDay.getFirst();
         Instant endOfDay = startAndEndOfDay.getSecond();
 
-        return this.orderRepository.countByDateBetweenAndStatus(startOfDay, endOfDay, OrderStatus.DELIVERED);
+        return orderRepository.countByDateBetweenAndStatus(startOfDay, endOfDay, OrderStatus.DELIVERED);
     }
 
     private long countPendingOrders() {
-        return this.orderRepository.countByStatus(OrderStatus.PENDING);
+        return orderRepository.countByStatus(OrderStatus.PENDING);
     }
 
     private long countDeliveringOrders() {
-        return this.orderRepository.countByStatus(OrderStatus.DELIVERING);
+        return orderRepository.countByStatus(OrderStatus.DELIVERING);
     }
 
     private void sendUpdates(Order order) throws IOException {
@@ -225,15 +225,15 @@ public class OrderService {
     }
 
     private void sendUpdatedOrder(Order order) throws IOException {
-        String orderJson = this.objectMapper.writeValueAsString(order);
+        String orderJson = objectMapper.writeValueAsString(order);
 
         orderHandler.broadcastMessage(orderJson);
     }
 
     private void sendUpdatedStatistics() throws IOException {
-        Map<String, Long> statistics = this.retrieveStatistics();
+        Map<String, Long> statistics = retrieveStatistics();
 
-        String statisticsJson = this.objectMapper.writeValueAsString(statistics);
+        String statisticsJson = objectMapper.writeValueAsString(statistics);
 
         statisticsHandler.broadcastMessage(statisticsJson);
     }

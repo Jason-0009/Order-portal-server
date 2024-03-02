@@ -1,11 +1,15 @@
-package com.order.portal.services;
+package com.order.portal.services.user;
 
-import java.util.NoSuchElementException;
+import java.util.*;
+import java.util.Objects;
 
 import java.io.IOException;
 
 import lombok.RequiredArgsConstructor;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.stereotype.Service;
 
 import org.springframework.data.domain.*;
@@ -17,9 +21,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import com.order.portal.repositories.UserRepository;
 
-import com.order.portal.models.user.UserRole;
-import com.order.portal.models.user.User;
+import com.order.portal.models.user.*;
 import com.order.portal.models.OAuthAccount;
+
+import com.order.portal.services.*;
 
 import com.order.portal.websocket.UserHandler;
 
@@ -36,7 +41,7 @@ public class UserService {
     private final ObjectMapper objectMapper = new ObjectMapper().findAndRegisterModules();
 
     public Page<User> retrieveUsers(Authentication authentication, Pageable pageable, String searchTerm) {
-        OAuthAccount oauthAccount = this.authService.retrieveAuthenticatedOAuthAccount(authentication);
+        OAuthAccount oauthAccount = authService.retrieveAuthenticatedOAuthAccount(authentication);
 
         Long authenticatedUserId = oauthAccount.getUserId();
 
@@ -44,52 +49,51 @@ public class UserService {
         Pageable sortedPageable = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), sort);
 
         if (searchTerm == null || searchTerm.isEmpty())
-            return this.userRepository.findByIdNot(sortedPageable, authenticatedUserId);
+            return userRepository.findByIdNot(sortedPageable, authenticatedUserId);
 
-        return this.userRepository.findByNameContainingIgnoreCaseAndIdNot(sortedPageable, searchTerm, authenticatedUserId);
+        return userRepository.findByNameContainingIgnoreCaseAndIdNot(sortedPageable, searchTerm, authenticatedUserId);
     }
 
     public User retrieveAuthenticatedUserProfile(Authentication authentication) throws AccessDeniedException {
-        OAuthAccount oauthAccount = this.authService.retrieveAuthenticatedOAuthAccount(authentication);
+        OAuthAccount oauthAccount = authService.retrieveAuthenticatedOAuthAccount(authentication);
 
-        return this.retrieveUserById(oauthAccount.getUserId());
+        if (oauthAccount == null) return null;
+
+        return retrieveUserById(oauthAccount.getUserId());
     }
 
     public void updateUserRole(Long userId, UserRole role) throws IOException {
-        User user = this.retrieveUserById(userId);
+        User user = retrieveUserById(userId);
         user.setRole(role);
 
-        this.userRepository.save(user);
+        userRepository.save(user);
 
-        this.sendUpdatedUser(user);
+        sendUpdatedUser(user);
 
-        OAuthAccount userAccount = this.authService.retrieveOAuthAccountByUserId(userId);
+        OAuthAccount userAccount = authService.retrieveOAuthAccountByUserId(userId);
 
         String messageCode = "roleUpdatedTo" + role.name().substring(0, 1).toUpperCase() +
                 role.name().substring(1).toLowerCase();
 
-        String redirectUrl = null;
-
-        if (user.getRole() == UserRole.ADMIN)
-            redirectUrl = "/admin/users";
+        String redirectUrl = Objects.equals(user.getRole(), UserRole.ADMIN) ? "/admin/users" : null;
 
         notificationService.saveNotification(userAccount, messageCode, redirectUrl);
     }
 
     public void updateUserPreferredLanguage(Long userId, String preferredLanguage) {
-        User user = this.retrieveUserById(userId);
+        User user = retrieveUserById(userId);
         user.setPreferredLanguage(preferredLanguage);
 
-        this.userRepository.save(user);
+        userRepository.save(user);
     }
 
     public User retrieveUserById(Long id) {
-        return this.userRepository.findById(id)
+        return userRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("User not found."));
     }
 
     private void sendUpdatedUser(User user) throws IOException {
-        String userJson = this.objectMapper.writeValueAsString(user);
+        String userJson = objectMapper.writeValueAsString(user);
 
         userHandler.broadcastMessage(userJson);
     }

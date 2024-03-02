@@ -25,29 +25,32 @@ import com.order.portal.websocket.NotificationHandler;
 public class NotificationService {
     private final NotificationRepository notificationRepository;
 
+    private final SequenceGeneratorService sequenceGeneratorService;
+
     private final NotificationHandler notificationHandler;
 
     private final ObjectMapper objectMapper = new ObjectMapper().findAndRegisterModules();
 
-    public List<Notification> retrieveNotifications(String userId) {
-        return this.notificationRepository.findByUserIdOrderByDateDesc(userId);
+    public List<Notification> retrieveNotifications(Long userId) {
+        return notificationRepository.findByUserIdOrderByDateDesc(userId);
     }
 
-    public void markNotificationAsRead(String notificationId) {
-        Notification notification = this.retrieveNotificationById(notificationId);
+    public void markNotificationAsRead(Long notificationId) {
+        Notification notification = retrieveNotificationById(notificationId);
 
         notification.setReadStatus(true);
 
         notificationRepository.save(notification);
     }
 
-    public void clearNotifications(String userId) {
-        this.notificationRepository.deleteByUserId(userId);
+    public void clearNotifications(Long userId) {
+        notificationRepository.deleteByUserId(userId);
     }
 
     public void saveNotification(OAuthAccount oauthAccount, String messageCode, String redirectUrl) throws IOException {
         Notification notification = new Notification();
 
+        notification.setId(sequenceGeneratorService.generateSequence(Notification.SEQUENCE_NAME));
         notification.setUserId(oauthAccount.getUserId());
         notification.setMessageCode(messageCode);
         notification.setDate(Instant.now());
@@ -55,12 +58,12 @@ public class NotificationService {
 
         notificationRepository.save(notification);
 
-        String notificationJson = this.objectMapper.writeValueAsString(notification);
+        String notificationJson = objectMapper.writeValueAsString(notification);
 
         notificationHandler.sendMessage(oauthAccount.getOauthUserId(), notificationJson);
     }
 
-    private Notification retrieveNotificationById(String id) {
+    private Notification retrieveNotificationById(Long id) {
         return notificationRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Notification not found."));
     }

@@ -1,5 +1,6 @@
 package com.order.portal.controllers;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import lombok.RequiredArgsConstructor;
@@ -14,8 +15,8 @@ import com.order.portal.services.AuthService;
 public class AuthController {
     private final AuthService authService;
 
-    @GetMapping("/is-authenticated")
-    public boolean checkUserAuthenticationStatus(Authentication authentication) {
-        return this.authService.checkAuthenticationStatus(authentication);
+    @GetMapping("/check")
+    public ResponseEntity<?> checkUserAuthenticationStatus(Authentication authentication) {
+        return authService.checkAuthenticationStatus(authentication);
     }
 }

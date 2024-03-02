@@ -6,9 +6,10 @@ import java.io.IOException;
 
 import java.time.Instant;
 
-import org.springframework.web.bind.annotation.*;
-
 import lombok.RequiredArgsConstructor;
+
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
 
 import org.springframework.data.domain.*;
 
@@ -18,8 +19,7 @@ import org.springframework.security.core.Authentication;
 
 import com.order.portal.services.OrderService;
 
-import com.order.portal.models.order.Order;
-import com.order.portal.models.order.OrderStatus;
+import com.order.portal.models.order.*;
 
 @RestController
 @RequestMapping("/api/orders")
@@ -27,11 +27,12 @@ import com.order.portal.models.order.OrderStatus;
 public class OrderController {
     private final OrderService orderService;
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping
     public Page<Order> retrieveOrders(Pageable pageable,
                                       @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Instant date,
                                       @RequestParam(required = false) OrderStatus status) {
-        return this.orderService.retrieveOrders(pageable, date, status);
+        return orderService.retrieveOrders(pageable, date, status);
     }
 
     @GetMapping("/user")
@@ -39,27 +40,27 @@ public class OrderController {
                                                           Pageable pageable,
                                                           @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Instant date,
                                                           @RequestParam(required = false) OrderStatus status) {
-        return this.orderService.retrieveOrdersForAuthenticatedUser(authentication, pageable, date, status);
+        return orderService.retrieveOrdersForAuthenticatedUser(authentication, pageable, date, status);
     }
 
     @GetMapping("/{orderId}")
     public Order retrieveOrderById(@PathVariable Long orderId) {
-        return this.orderService.retrieveOrderById(orderId);
+        return orderService.retrieveOrderById(orderId);
     }
 
     @GetMapping("/statistics")
     public Map<String, Long> retrieveStatistics() {
-        return this.orderService.retrieveStatistics();
+        return orderService.retrieveStatistics();
     }
 
     @PostMapping
     public void submitNewOrderForUser(Authentication authentication, @RequestBody Order order) throws IOException {
-        this.orderService.submitNewOrderForUser(authentication, order);
+        orderService.submitNewOrderForUser(authentication, order);
     }
 
     @PutMapping("/{orderId}")
     public void updateOrderStatus(@PathVariable Long orderId,
                                   @RequestBody OrderStatus status) throws IOException {
-        this.orderService.updateOrderStatus(orderId, status);
+        orderService.updateOrderStatus(orderId, status);
     }
 }

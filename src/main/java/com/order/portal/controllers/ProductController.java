@@ -20,11 +20,11 @@ public class ProductController {
 
     @GetMapping
     public Page<Product> retrieveProducts(Pageable pageable) {
-        return this.productService.retrieveAllProducts(pageable);
+        return productService.retrieveAllProducts(pageable);
     }
 
     @GetMapping(params = "ids")
     public Page<Product> retrieveProducts(@RequestParam List<Long> ids, Pageable pageable) {
-        return this.productService.retrieveProductsByIds(ids, pageable);
+        return productService.retrieveProductsByIds(ids, pageable);
     }
 }

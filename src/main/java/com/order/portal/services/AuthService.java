@@ -2,7 +2,7 @@ package com.order.portal.services;
 
 import java.util.NoSuchElementException;
 
-import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.http.*;
 
 import org.springframework.stereotype.Service;
 
@@ -22,26 +22,26 @@ import com.order.portal.repositories.OAuthAccountRepository;
 public class AuthService {
     private final OAuthAccountRepository oauthAccountRepository;
 
-    public boolean checkAuthenticationStatus(Authentication authentication) {
-        return authentication != null &&
-                !(authentication instanceof AnonymousAuthenticationToken);
+    public ResponseEntity<?> checkAuthenticationStatus(Authentication authentication) {
+        if (authentication == null || !authentication.isAuthenticated())
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+
+        return ResponseEntity.ok().build();
     }
 
     public OAuthAccount retrieveAuthenticatedOAuthAccount(Authentication authentication) throws AccessDeniedException {
-        boolean isAuthenticated = checkAuthenticationStatus(authentication);
-
-        if (!isAuthenticated) throw new AccessDeniedException("User is not authenticated.");
+        if (authentication == null) return null;
 
         OidcUser principal = (OidcUser) authentication.getPrincipal();
 
         String oauthUserId = principal.getAttribute("sub");
 
-        return this.oauthAccountRepository.findByOauthUserId(oauthUserId)
+        return oauthAccountRepository.findByOauthUserId(oauthUserId)
                 .orElseThrow(() -> new NoSuchElementException("OAuthAccount not found."));
     }
 
     public OAuthAccount retrieveOAuthAccountByUserId(Long userId) throws NoSuchElementException {
-        return this.oauthAccountRepository.findByUserId(userId)
+        return oauthAccountRepository.findByUserId(userId)
                 .orElseThrow(() -> new NoSuchElementException(String.format("OAuthAccount not found for userId: %s.", userId)));
     }
 }

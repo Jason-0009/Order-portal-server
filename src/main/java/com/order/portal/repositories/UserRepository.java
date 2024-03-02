@@ -10,7 +10,6 @@ import com.order.portal.models.user.User;
 
 public interface UserRepository extends MongoRepository<User, String> {
     Optional<User> findByEmail(String email);
-
     Optional<User> findById(Long id);
     Page<User> findByIdNot(Pageable pageable, Long id);
     Page<User> findByNameContainingIgnoreCaseAndIdNot(Pageable pageable, String searchTerm, Long id);

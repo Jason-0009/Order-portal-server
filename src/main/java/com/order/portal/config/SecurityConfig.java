@@ -1,11 +1,16 @@
 package com.order.portal.config;
 
-import org.springframework.beans.factory.annotation.Value;
+import lombok.RequiredArgsConstructor;
+
+import org.springframework.beans.factory.annotation.*;
 
 import org.springframework.context.annotation.*;
 
 import org.springframework.security.config.Customizer;
+
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 
 import org.springframework.security.web.SecurityFilterChain;
@@ -16,31 +21,26 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import org.springframework.web.cors.*;
 
-import java.net.URI;
-
-import lombok.RequiredArgsConstructor;
-
 import com.order.portal.config.handlers.OAuth2LoginSuccessHandler;
+
+import com.order.portal.services.user.MyOidcUserService;
 
 @Configuration
 @EnableWebSecurity
+@EnableMethodSecurity
 @RequiredArgsConstructor
 public class SecurityConfig {
+    private final CsrfTokenRepository csrfTokenRepository;
+
     private final OAuth2LoginSuccessHandler oauth2LoginSuccessHandler;
+
+    private final MyOidcUserService myOidcUserService;
 
     @Value("${client.url}")
     private String clientUrl;
 
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        URI clientUri = new URI(clientUrl);
-        String domain = clientUri.getHost().startsWith("www.") ?
-                clientUri.getHost().substring(4) : clientUri.getHost();
-
-        CookieCsrfTokenRepository csrfTokenRepository = CookieCsrfTokenRepository.withHttpOnlyFalse();
-
-        csrfTokenRepository.setCookieDomain(domain);
-
         http
                 .cors(Customizer.withDefaults())
                 .csrf(csrf -> csrf
@@ -50,7 +50,8 @@ public class SecurityConfig {
                 .authorizeHttpRequests(requests -> requests
                         .requestMatchers("/api/products", "/api/orders").authenticated()
                         .anyRequest().permitAll())
-                .oauth2Login(oauth2 -> oauth2.successHandler(oauth2LoginSuccessHandler))
+                .oauth2Login(oauth2 -> oauth2.successHandler(oauth2LoginSuccessHandler)
+                        .userInfoEndpoint(userInfoEndpointConfig -> userInfoEndpointConfig.oidcUserService(myOidcUserService)))
                 .logout(logout -> logout
                         .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                         .logoutSuccessUrl(clientUrl));
