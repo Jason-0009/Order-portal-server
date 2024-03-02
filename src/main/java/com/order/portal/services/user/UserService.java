@@ -7,9 +7,6 @@ import java.io.IOException;
 
 import lombok.RequiredArgsConstructor;
 
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.stereotype.Service;
 
 import org.springframework.data.domain.*;
