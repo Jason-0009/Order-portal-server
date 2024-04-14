@@ -1,8 +1,9 @@
 package com.order.portal.models.user;
 
-import lombok.Data;
+import java.util.Collection;
+import java.util.Collections;
 
-import java.util.*;
+import lombok.Data;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 

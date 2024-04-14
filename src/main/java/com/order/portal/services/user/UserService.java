@@ -1,27 +1,34 @@
 package com.order.portal.services.user;
 
-import java.util.*;
+import java.util.NoSuchElementException;
 import java.util.Objects;
 
 import java.io.IOException;
 
 import lombok.RequiredArgsConstructor;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+
 import org.springframework.stereotype.Service;
 
-import org.springframework.data.domain.*;
-
 import org.springframework.security.access.AccessDeniedException;
+
 import org.springframework.security.core.Authentication;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import com.order.portal.repositories.UserRepository;
 
-import com.order.portal.models.user.*;
 import com.order.portal.models.OAuthAccount;
 
-import com.order.portal.services.*;
+import com.order.portal.models.user.User;
+import com.order.portal.models.user.UserRole;
+
+import com.order.portal.services.AuthService;
+import com.order.portal.services.NotificationService;
 
 import com.order.portal.websocket.UserHandler;
 

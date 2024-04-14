@@ -25,5 +25,4 @@ public class Order {
     private List<OrderItem> items;
 
     public static final String SEQUENCE_NAME = "orders_sequence";
-
 }

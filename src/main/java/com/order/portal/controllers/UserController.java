@@ -4,18 +4,21 @@ import java.io.IOException;
 
 import lombok.RequiredArgsConstructor;
 
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
-import org.springframework.data.domain.*;
+import org.springframework.security.access.prepost.PreAuthorize;
 
 import org.springframework.security.access.AccessDeniedException;
 
 import org.springframework.security.core.Authentication;
 
-import com.order.portal.models.user.*;
-
 import com.order.portal.services.user.UserService;
+
+import org.springframework.web.bind.annotation.*;
+
+import com.order.portal.models.user.User;
+import com.order.portal.models.user.UserRole;
 
 @RestController
 @RequestMapping("/api/users")

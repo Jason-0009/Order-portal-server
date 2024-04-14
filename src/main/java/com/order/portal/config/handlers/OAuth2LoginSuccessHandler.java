@@ -2,7 +2,6 @@ package com.order.portal.config.handlers;
 
 import java.io.IOException;
 
-
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.stereotype.Component;

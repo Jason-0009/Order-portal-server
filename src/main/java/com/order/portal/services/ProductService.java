@@ -2,15 +2,16 @@ package com.order.portal.services;
 
 import java.util.List;
 
+import lombok.RequiredArgsConstructor;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import org.springframework.stereotype.Service;
 
 import com.order.portal.models.Product;
-import com.order.portal.repositories.ProductRepository;
 
-import lombok.RequiredArgsConstructor;
+import com.order.portal.repositories.ProductRepository;
 
 @Service
 @RequiredArgsConstructor
