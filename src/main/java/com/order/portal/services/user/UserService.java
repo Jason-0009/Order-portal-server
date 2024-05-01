@@ -61,9 +61,7 @@ public class UserService {
     public User retrieveAuthenticatedUserProfile(Authentication authentication) throws AccessDeniedException {
         OAuthAccount oauthAccount = authService.retrieveAuthenticatedOAuthAccount(authentication);
 
-        if (oauthAccount == null) return null;
-
-        return retrieveUserById(oauthAccount.getUserId());
+        return Objects.requireNonNull(retrieveUserById(oauthAccount.getUserId()));
     }
 
     public void updateUserRole(Long userId, UserRole role) throws IOException {

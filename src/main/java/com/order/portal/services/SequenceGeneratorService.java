@@ -1,5 +1,7 @@
 package com.order.portal.services;
 
+import java.util.Objects;
+
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.data.mongodb.core.FindAndModifyOptions;
@@ -16,7 +18,6 @@ import com.order.portal.models.DatabaseSequence;
 @Service
 @RequiredArgsConstructor
 public class SequenceGeneratorService {
-
     private final MongoOperations mongoOperations;
 
     public long generateSequence(String sequenceName) {
@@ -27,8 +28,6 @@ public class SequenceGeneratorService {
                 DatabaseSequence.class
         );
 
-        assert counter != null;
-
-        return counter.getValue();
+        return Objects.requireNonNull(counter).getValue();
     }
 }
