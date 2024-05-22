@@ -22,39 +22,42 @@ public abstract class BaseHandler extends AbstractWebSocketHandler {
 
     @Override
     public void afterConnectionEstablished(WebSocketSession session) {
-        Principal principal = session.getPrincipal();
-
-        if (!(principal instanceof OAuth2AuthenticationToken token)) return;
-
-        String oauthUserId = token.getPrincipal().getAttribute("sub");
+        String oauthUserId = getOauthUserId(session.getPrincipal());
+        if (oauthUserId == null) return;
 
         sessions.put(oauthUserId, session);
     }
 
     @Override
     public void afterConnectionClosed(WebSocketSession session, @NonNull CloseStatus status) {
-        Principal principal = session.getPrincipal();
-
-        if (!(principal instanceof OAuth2AuthenticationToken token)) return;
-
-        String oauthUserId = token.getPrincipal().getAttribute("sub");
+        String oauthUserId = getOauthUserId(session.getPrincipal());
+        if (oauthUserId == null) return;
 
         sessions.remove(oauthUserId);
     }
 
     public void sendMessage(String oauthUserId, String message) throws IOException {
         WebSocketSession session = sessions.get(oauthUserId);
-
         if (session == null || !session.isOpen()) return;
 
         session.sendMessage(new TextMessage(message));
     }
 
-    public void broadcastMessage(String message) throws IOException {
-        for (WebSocketSession session : sessions.values()) {
-            if (!session.isOpen()) continue;
+    public void broadcastMessage(String message) {
+        sessions.values().forEach(session -> {
+            if (!session.isOpen()) return;
 
-            session.sendMessage(new TextMessage(message));
-        }
+            try {
+                session.sendMessage(new TextMessage(message));
+            } catch (IOException exception) {
+                throw new RuntimeException(exception);
+            }
+        });
+    }
+
+    private String getOauthUserId(Principal principal) {
+        if (!(principal instanceof OAuth2AuthenticationToken token)) return null;
+
+        return token.getPrincipal().getAttribute("sub");
     }
 }
